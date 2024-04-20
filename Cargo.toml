@@ -1,8 +1,13 @@
 [package]
 name = "tarpar"
+description = "Tool for parcing drawio xml file and generate list of objects in text form"
 version = "0.1.0"
 edition = "2021"
+authors = ["Andrew Bizyaev <andrew.bizyaev@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1.0.82"
+clap = { version = "4.5", features = ["derive"] }
+roxmltree = "0.19.0"
