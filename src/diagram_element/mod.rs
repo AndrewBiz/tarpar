@@ -36,6 +36,10 @@ impl<'a> DiagramElement<'a> {
         let id = raw_element.attribute("id").unwrap_or("not_found");
         let parent_id = raw_element.attribute("parent").unwrap_or("not_found");
         let value = raw_element.attribute("value").unwrap_or("not_found");
+
+        let style = raw_element.attribute("style").unwrap_or("");
+        println!("style='{}'", style);
+
         let html_fragment = Html::parse_fragment(value);
         // println!("!html!!! {:?}", html_fragment);
 

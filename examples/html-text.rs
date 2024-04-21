@@ -51,10 +51,13 @@ fn main() {
     // Html::parse_fragment(r#"<font color="\#ff0000"><strike>Функция удаляется</strike></font>"#);
 
     // let fragment = Html::parse_fragment(r#"<font color="\#0000ff">- Бюджет G&amp;A</font>"#);
-    let fragment = Html::parse_fragment(
-        r#"<b>+ Договорной учет (договоры / ДС СМР / АХР / Коммерческие):<br></b><span style="white-space: pre;">  </span>+ Формирование карточки договора через интеграцию<br><span style="white-space: pre;">    </span>+ Контроль лимитов по договору<br><span style="white-space: pre;">       </span>+ Учет графика поставок/начислений<br><span style="white-space: pre;">   </span>+ Учет исполнения договора закрывающими и платежными документами<br><span style="white-space: pre;">     </span>+ Контроль сроков договоров<br><span style="white-space: pre;">  </span>+ Отображение план/факта ДДС<br><span style="white-space: pre;"> </span>+ Учет графика платежей<br><span style="white-space: pre;">      </span>+ Отправка уведомлений<br><span style="white-space: pre;">       </span>+ Поиск и фильтрация договоров<br><span style="white-space: pre;">      </span>+ Отчетность по договорам<b><br></b>"#,
-    );
+    // let fragment = Html::parse_fragment(
+    //     r#"<b>+ Договорной учет (договоры / ДС СМР / АХР / Коммерческие):<br></b><span style="white-space: pre;">  </span>+ Формирование карточки договора через интеграцию<br><span style="white-space: pre;">    </span>+ Контроль лимитов по договору<br><span style="white-space: pre;">       </span>+ Учет графика поставок/начислений<br><span style="white-space: pre;">   </span>+ Учет исполнения договора закрывающими и платежными документами<br><span style="white-space: pre;">     </span>+ Контроль сроков договоров<br><span style="white-space: pre;">  </span>+ Отображение план/факта ДДС<br><span style="white-space: pre;"> </span>+ Учет графика платежей<br><span style="white-space: pre;">      </span>+ Отправка уведомлений<br><span style="white-space: pre;">       </span>+ Поиск и фильтрация договоров<br><span style="white-space: pre;">      </span>+ Отчетность по договорам<b><br></b>"#,
+    // );
 
+    let fragment = Html::parse_fragment(
+        r#"<span style="border-color: var(--border-color); caret-color: rgb(0, 153, 0); color: rgb(0, 153, 0); font-size: 13px;">- Динамика ТП&nbsp;</span>"#,
+    );
     println!("{:#?}", fragment);
 
     // let selector = Selector::parse(r#"font"#).unwrap();
