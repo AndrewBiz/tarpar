@@ -1,5 +1,5 @@
 use roxmltree::Node;
-use scraper::Html;
+// use scraper::Html;
 
 // **************************************
 #[derive(Debug)]
@@ -40,7 +40,7 @@ impl<'a> DiagramElement<'a> {
         let style = raw_element.attribute("style").unwrap_or("");
         println!("style='{}'", style);
 
-        let html_fragment = Html::parse_fragment(value);
+        // let html_fragment = Html::parse_fragment(value);
         // println!("!html!!! {:?}", html_fragment);
 
         let color_r = 0;
