@@ -22,7 +22,7 @@ pub struct CliArgs {
 fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a>> {
     log::debug!("START diagram reading");
     let diagram_name = diagram.attribute("name").unwrap_or("n/a");
-    log::debug!("diagram name: {}", diagram_name);
+    log::debug!("diagram page name: {}", diagram_name);
     let mut elements = HashMap::new();
 
     if let Some(diagram_root) = diagram.first_element_child() {
@@ -31,7 +31,8 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a
                 if raw_element.is_element() {
                     match raw_element.tag_name().name() {
                         "mxCell" => {
-                            let element = DiagramElement::read_mxcell(raw_element, diagram_name);
+                            let mut element = DiagramElement::read_mxcell(raw_element);
+                            element.diagram_page_name = diagram_name;
                             elements.insert(element.id, element);
                         }
                         "UserObject" => {
@@ -78,18 +79,33 @@ fn main() -> Result<()> {
 
     let drawio_host = root_element.attribute("host").unwrap_or("n/a");
     let drawio_version = root_element.attribute("version").unwrap_or("n/a");
+    let mut diagram_page_n: u8 = 0;
     log::debug!("drawio host: {}, version: {}", drawio_host, drawio_version);
 
     for child in root_element.children() {
         if child.is_element() && child.has_tag_name("diagram") {
             // read one page (diagram)
-            let elements = read_diagram(child);
-            // export page elements
-            for e in elements {
-                let (e_key, e_val) = e;
+            diagram_page_n += 1;
+            let mut elements: HashMap<&str, DiagramElement<'_>> = read_diagram(child);
+
+            // process elements
+            for (_, e_val) in elements.iter_mut() {
+                e_val.diagram_page_n = diagram_page_n;
+                e_val.drawio_host = drawio_host;
+                e_val.drawio_version = drawio_version;
+            }
+            // export elements
+            for (e_key, e_val) in &elements {
                 println!(
-                    "  {}, value: {}, diagram_name: {}, link: {} -> {}",
-                    e_key, e_val.value, e_val.diagram_name, e_val.source_id, e_val.target_id,
+                    "!!!!!  {}, value: {}, diagram_page: {}-'{}', link: {} -> {} drawio: {}-{}",
+                    e_key,
+                    e_val.value,
+                    e_val.diagram_page_n,
+                    e_val.diagram_page_name,
+                    e_val.source_id,
+                    e_val.target_id,
+                    e_val.drawio_host,
+                    e_val.drawio_version,
                 );
             }
         }

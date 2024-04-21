@@ -1,6 +1,5 @@
-use std::io::StdoutLock;
-
 use roxmltree::Node;
+use scraper::Html;
 
 // **************************************
 #[derive(Debug)]
@@ -19,12 +18,15 @@ pub struct DiagramElement<'a> {
     // tooltip: &'a str,
     pub source_id: &'a str,
     pub target_id: &'a str,
-    pub diagram_name: &'a str,
+    pub diagram_page_n: u8,
+    pub diagram_page_name: &'a str,
+    pub drawio_host: &'a str,
+    pub drawio_version: &'a str,
 }
 
 // **************************************
 impl<'a> DiagramElement<'a> {
-    pub fn read_mxcell(raw_element: Node<'a, 'a>, diagram_name: &'a str) -> DiagramElement<'a> {
+    pub fn read_mxcell(raw_element: Node<'a, 'a>) -> DiagramElement<'a> {
         log::debug!("START diagram element processing");
         log::debug!(
             "diagram element tag_name: {}",
@@ -34,12 +36,19 @@ impl<'a> DiagramElement<'a> {
         let id = raw_element.attribute("id").unwrap_or("not_found");
         let parent_id = raw_element.attribute("parent").unwrap_or("not_found");
         let value = raw_element.attribute("value").unwrap_or("not_found");
+        let html_fragment = Html::parse_fragment(value);
+        // println!("!html!!! {:?}", html_fragment);
 
         let color_r = 0;
         let color_g = 0;
         let color_b = 0;
         let source_id = raw_element.attribute("source").unwrap_or("not_found");
         let target_id = raw_element.attribute("target").unwrap_or("not_found");
+
+        let diagram_page_n: u8 = 0;
+        let diagram_page_name = "";
+        let drawio_host = "";
+        let drawio_version = "";
 
         log::debug!("FINISH diagram element processing");
         Self {
@@ -51,7 +60,10 @@ impl<'a> DiagramElement<'a> {
             color_b,
             source_id,
             target_id,
-            diagram_name,
+            diagram_page_n,
+            diagram_page_name,
+            drawio_host,
+            drawio_version,
         }
     }
 }
