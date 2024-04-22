@@ -20,12 +20,12 @@ pub struct CliArgs {
 }
 
 // **************************************
-fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a>> {
+fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
     log::debug!("START diagram reading");
     let page_name = diagram.attribute("name").unwrap_or("n/a");
     log::debug!("diagram page name: {}", page_name);
 
-    let mut elements = HashMap::new();
+    let mut elements = Vec::new();
 
     let mut top_element_id = "";
     let mut current_layer_n: u8 = 0;
@@ -50,7 +50,7 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a
                             }
                             element.layer_n = current_layer_n;
 
-                            elements.insert(element.id, element);
+                            elements.push(element);
                         }
                         "UserObject" => {
                             // println!("UserObject: {:?}", element.attributes())
@@ -109,18 +109,18 @@ fn main() -> Result<()> {
             // read one page (diagram)
             println!("================================================");
             diagram_page_n += 1;
-            let mut elements: HashMap<&str, DiagramElement<'_>> = read_diagram(child);
+            let mut elements: Vec<DiagramElement<'_>> = read_diagram(child);
 
             // process elements
-            for (_, e_val) in elements.iter_mut() {
+            for e_val in elements.iter_mut() {
                 e_val.diagram_page_n = diagram_page_n;
                 e_val.drawio_host = drawio_host;
                 e_val.drawio_version = drawio_version;
             }
             // export elements
             // println!("{:?}", &elements);
-            for (e_key, e_val) in &elements {
-                println!("   element key: {} value: {:?}", e_key, e_val,);
+            for e_val in &elements {
+                println!("   element value: {:?}", e_val,);
                 println!("************************************************")
             }
         }
