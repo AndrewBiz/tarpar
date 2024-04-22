@@ -10,7 +10,7 @@ pub enum ElementType {
     Group,
     TextBlock,
     System,
-    SystemFunction,
+    // SystemFunction,
     Link,
     LinkLabel,
     Shape(String),
