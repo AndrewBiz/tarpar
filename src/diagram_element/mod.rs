@@ -1,7 +1,5 @@
 use regex::Regex;
 use roxmltree::Node;
-// use scraper::element_ref;
-// use scraper::Html;
 
 // **************************************
 #[derive(Debug)]
@@ -24,7 +22,7 @@ pub enum ElementType {
 pub struct DiagramElement<'a> {
     pub id: &'a str,
     pub parent_id: &'a str,
-    pub value: &'a str,
+    pub value: String,
     pub element_type: ElementType,
     pub color_r: u8,
     pub color_g: u8,
@@ -88,8 +86,15 @@ impl<'a> DiagramElement<'a> {
             }
         }
 
-        // TODO html off
-        let value = raw_element.attribute("value").unwrap_or(tarpar::NO_VALUE);
+        // removing html stuff
+        let fragment = scraper::Html::parse_fragment(
+            raw_element.attribute("value").unwrap_or(tarpar::NO_VALUE),
+        );
+        let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
+        let html_node = fragment.select(&html_selector).next().unwrap();
+        let text_vec = html_node.text().collect::<Vec<_>>();
+        // TODO trim whitespaces in each piece of text: \u{a0} \t
+        let value = text_vec.join(" ");
 
         let color_r = 0;
         let color_g = 0;

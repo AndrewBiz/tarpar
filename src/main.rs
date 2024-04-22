@@ -120,7 +120,7 @@ fn main() -> Result<()> {
             // export elements
             // println!("{:?}", &elements);
             for e_val in &elements {
-                println!("   element value: {:?}", e_val,);
+                println!("   {:?}", e_val,);
                 println!("************************************************")
             }
         }
