@@ -28,6 +28,7 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a
     let mut elements = HashMap::new();
 
     let mut top_element_id = "";
+    let mut current_layer_n: u8 = 0;
 
     if let Some(diagram_root) = diagram.first_element_child() {
         if let Some(diagram_root) = diagram_root.first_element_child() {
@@ -45,7 +46,10 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a
                             // check if element is layer
                             if element.parent_id == top_element_id {
                                 element.element_type = ElementType::Layer;
+                                current_layer_n += 1;
                             }
+                            element.layer_n = current_layer_n;
+
                             elements.insert(element.id, element);
                         }
                         "UserObject" => {

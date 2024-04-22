@@ -37,6 +37,7 @@ pub struct DiagramElement<'a> {
     pub target_id: &'a str,
     pub diagram_page_n: u8,
     pub diagram_page_name: &'a str,
+    pub layer_n: u8,
     pub drawio_host: &'a str,
     pub drawio_version: &'a str,
 }
@@ -64,12 +65,10 @@ fn get_element_type(style: &str) -> ElementType {
 impl<'a> DiagramElement<'a> {
     pub fn read_mxcell(raw_element: Node<'a, 'a>) -> DiagramElement<'a> {
         log::debug!("START diagram element processing");
-        log::debug!(
-            "diagram element tag_name: {}",
-            raw_element.tag_name().name()
-        );
 
         let id = raw_element.attribute("id").unwrap_or(tarpar::NO_VALUE);
+        log::debug!("tag_name: {}, ID: {}", raw_element.tag_name().name(), id,);
+
         let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
 
         // Checking out the type of element
@@ -94,6 +93,7 @@ impl<'a> DiagramElement<'a> {
 
         let diagram_page_n: u8 = 0;
         let diagram_page_name = "";
+        let layer_n = 0;
         let drawio_host = "";
         let drawio_version = "";
 
@@ -110,6 +110,7 @@ impl<'a> DiagramElement<'a> {
             target_id,
             diagram_page_n,
             diagram_page_name,
+            layer_n,
             drawio_host,
             drawio_version,
         }
