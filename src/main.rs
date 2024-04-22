@@ -1,5 +1,6 @@
 mod diagram_element;
 
+use crate::diagram_element::ElementType;
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use roxmltree::Node;
@@ -21,9 +22,12 @@ pub struct CliArgs {
 // **************************************
 fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a>> {
     log::debug!("START diagram reading");
-    let diagram_name = diagram.attribute("name").unwrap_or("n/a");
-    log::debug!("diagram page name: {}", diagram_name);
+    let page_name = diagram.attribute("name").unwrap_or("n/a");
+    log::debug!("diagram page name: {}", page_name);
+
     let mut elements = HashMap::new();
+
+    let mut top_element_id = "";
 
     if let Some(diagram_root) = diagram.first_element_child() {
         if let Some(diagram_root) = diagram_root.first_element_child() {
@@ -32,7 +36,16 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> HashMap<&'a str, DiagramElement<'a
                     match raw_element.tag_name().name() {
                         "mxCell" => {
                             let mut element = DiagramElement::read_mxcell(raw_element);
-                            element.diagram_page_name = diagram_name;
+                            element.diagram_page_name = page_name;
+                            // save 1st - root element
+                            if element.parent_id == tarpar::NO_VALUE {
+                                top_element_id = element.id;
+                                element.element_type = ElementType::Top;
+                            }
+                            // check if element is layer
+                            if element.parent_id == top_element_id {
+                                element.element_type = ElementType::Layer;
+                            }
                             elements.insert(element.id, element);
                         }
                         "UserObject" => {
@@ -72,19 +85,25 @@ fn main() -> Result<()> {
     let tree = roxmltree::Document::parse(&text)
         .with_context(|| format!("Failed parcing {} with roxmltree", &cli_args.drawio_file))?;
 
+    // println!("{:?}", tree);
+
     let root_element = tree.root_element();
     if !root_element.has_tag_name("mxfile") {
         return Err(anyhow!("file is not drawio!"));
     }
 
-    let drawio_host = root_element.attribute("host").unwrap_or("n/a");
-    let drawio_version = root_element.attribute("version").unwrap_or("n/a");
-    let mut diagram_page_n: u8 = 0;
+    let drawio_host = root_element.attribute("host").unwrap_or(tarpar::NO_VALUE);
+    let drawio_version = root_element
+        .attribute("version")
+        .unwrap_or(tarpar::NO_VALUE);
+
     log::debug!("drawio host: {}, version: {}", drawio_host, drawio_version);
+    let mut diagram_page_n: u8 = 0;
 
     for child in root_element.children() {
         if child.is_element() && child.has_tag_name("diagram") {
             // read one page (diagram)
+            println!("================================================");
             diagram_page_n += 1;
             let mut elements: HashMap<&str, DiagramElement<'_>> = read_diagram(child);
 
@@ -95,19 +114,11 @@ fn main() -> Result<()> {
                 e_val.drawio_version = drawio_version;
             }
             // export elements
-            for (e_key, e_val) in &elements {
-                println!(
-                    "!!!!!  {}, value: {}, diagram_page: {}-'{}', link: {} -> {} drawio: {}-{}",
-                    e_key,
-                    e_val.value,
-                    e_val.diagram_page_n,
-                    e_val.diagram_page_name,
-                    e_val.source_id,
-                    e_val.target_id,
-                    e_val.drawio_host,
-                    e_val.drawio_version,
-                );
-            }
+            println!("{:?}", &elements);
+            // for (e_key, e_val) in &elements {
+            //     println!("   element key: {} value: {:?}", e_key, e_val,);
+            //     println!("************************************************")
+            // }
         }
     }
     log::debug!("FINISH main");
