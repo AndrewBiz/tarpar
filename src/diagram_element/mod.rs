@@ -1,5 +1,6 @@
+use regex::Regex;
 use roxmltree::Node;
-use scraper::element_ref;
+// use scraper::element_ref;
 // use scraper::Html;
 
 // **************************************
@@ -55,7 +56,12 @@ fn get_element_type(style: &str) -> ElementType {
     } else if style.contains("edgeLabel;") {
         ElementType::LinkLabel
     } else if style.contains("shape=") {
-        ElementType::Shape("TODO".to_string())
+        let re = Regex::new(r"shape=(?<shape_name>[A-Za-z0-9._]+);").unwrap();
+        if let Some(caps) = re.captures(&style) {
+            ElementType::Shape(caps["shape_name"].to_string())
+        } else {
+            ElementType::Shape("_".to_string())
+        }
     } else {
         ElementType::Area
     }

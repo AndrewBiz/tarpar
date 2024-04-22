@@ -118,11 +118,11 @@ fn main() -> Result<()> {
                 e_val.drawio_version = drawio_version;
             }
             // export elements
-            println!("{:?}", &elements);
-            // for (e_key, e_val) in &elements {
-            //     println!("   element key: {} value: {:?}", e_key, e_val,);
-            //     println!("************************************************")
-            // }
+            // println!("{:?}", &elements);
+            for (e_key, e_val) in &elements {
+                println!("   element key: {} value: {:?}", e_key, e_val,);
+                println!("************************************************")
+            }
         }
     }
     log::debug!("FINISH main");
