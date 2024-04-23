@@ -117,12 +117,10 @@ fn main() -> Result<()> {
                 e_val.drawio_version = drawio_version;
             }
             // export elements
-            println!(
-                " \"id\"; \"type\"; \"value\"; \"parent\"; \"layer\"; \"diagram\"; \"drawio\";"
-            );
+            println!("\"id\";\"type\";\"value\";\"parent\";\"layer\";\"diagram\";\"drawio\";");
             for e_val in &elements {
                 println!(
-                    "\"{}\"; \"{:?}\"; \"{}\"; \"{}\"; \"слой {}\"; \"{}-{}\"; \"{}-{}\";",
+                    "\"{}\";\"{:?}\";\"{}\";\"{}\";\"слой {}\";\"{}-{}\";\"{}-{}\";",
                     e_val.id,
                     e_val.element_type,
                     e_val.value,
