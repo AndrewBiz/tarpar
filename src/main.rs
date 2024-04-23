@@ -107,7 +107,6 @@ fn main() -> Result<()> {
     for child in root_element.children() {
         if child.is_element() && child.has_tag_name("diagram") {
             // read one page (diagram)
-            println!("================================================");
             diagram_page_n += 1;
             let mut elements: Vec<DiagramElement<'_>> = read_diagram(child);
 
@@ -118,10 +117,22 @@ fn main() -> Result<()> {
                 e_val.drawio_version = drawio_version;
             }
             // export elements
-            // println!("{:?}", &elements);
+            println!(
+                " \"id\"; \"type\"; \"value\"; \"parent\"; \"layer\"; \"diagram\"; \"drawio\";"
+            );
             for e_val in &elements {
-                println!("   {:?}", e_val);
-                println!("************************************************")
+                println!(
+                    "\"{}\"; \"{:?}\"; \"{}\"; \"{}\"; \"слой {}\"; \"{}-{}\"; \"{}-{}\";",
+                    e_val.id,
+                    e_val.element_type,
+                    e_val.value,
+                    e_val.parent_id,
+                    e_val.layer_n,
+                    e_val.diagram_page_n,
+                    e_val.diagram_page_name,
+                    e_val.drawio_host,
+                    e_val.drawio_version,
+                );
             }
         }
     }
