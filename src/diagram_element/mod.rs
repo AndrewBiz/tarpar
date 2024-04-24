@@ -85,11 +85,17 @@ impl<'a> DiagramElement<'a> {
                 element_type = ElementType::None
             }
         }
+        // reading text value (try value then label)
+        let raw_value = if let Some(value) = raw_element.attribute("value") {
+            value
+        } else if let Some(label) = raw_element.attribute("label") {
+            label
+        } else {
+            tarpar::NO_VALUE
+        };
 
-        // removing html stuff
-        let fragment = scraper::Html::parse_fragment(
-            raw_element.attribute("value").unwrap_or(tarpar::NO_VALUE),
-        );
+        // removing html stuff from text
+        let fragment = scraper::Html::parse_fragment(raw_value);
         let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
         let html_node = fragment.select(&html_selector).next().unwrap();
         let text_vec: Vec<&str> = html_node
@@ -98,7 +104,6 @@ impl<'a> DiagramElement<'a> {
             .iter()
             .map(|x| x.trim())
             .collect();
-
         let value = text_vec.join(" ");
 
         let color_r = 0;
