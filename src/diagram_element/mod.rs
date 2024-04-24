@@ -20,13 +20,11 @@ pub enum ElementType {
 // **************************************
 #[derive(Debug)]
 pub struct DiagramElement<'a> {
+    pub element_type: ElementType,
     pub id: &'a str,
     pub parent_id: &'a str,
     pub value: String,
-    pub element_type: ElementType,
-    pub color_r: u8,
-    pub color_g: u8,
-    pub color_b: u8,
+    pub text_color: String,
     // color_style: &'a str,
     // color_text: &'a str,
     // label: &'a str,
@@ -76,15 +74,21 @@ impl<'a> DiagramElement<'a> {
         let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
 
         // Checking out the type of element
-        let style;
-        let element_type;
-        match raw_element.attribute("style") {
-            Some(style) => element_type = get_element_type(style),
-            None => {
-                style = tarpar::NO_VALUE;
-                element_type = ElementType::None
-            }
-        }
+        // let style;
+        // let element_type;
+        let (style, element_type) = if let Some(style) = raw_element.attribute("style") {
+            (style, get_element_type(style))
+        } else {
+            (tarpar::NO_VALUE, ElementType::None)
+        };
+
+        // match raw_element.attribute("style") {
+        //     Some(style) => element_type = get_element_type(style),
+        //     None => {
+        //         style = tarpar::NO_VALUE;
+        //         element_type = ElementType::None
+        //     }
+        // }
         // reading text value (try value then label)
         let raw_value = if let Some(value) = raw_element.attribute("value") {
             value
@@ -93,7 +97,30 @@ impl<'a> DiagramElement<'a> {
         } else {
             tarpar::NO_VALUE
         };
-
+        // TODO reading text color
+        // try read font color from html
+        let fragment = scraper::Html::parse_fragment(raw_value);
+        let html_selector = scraper::Selector::parse(r#"font"#).unwrap();
+        let raw_color = if let Some(html_node) = fragment.select(&html_selector).next() {
+            if let Some(font_color) = html_node.value().attr("color") {
+                Some(font_color)
+            } else {
+                None
+            }
+        } else {
+            None
+        };
+        // try read font color from style
+        let text_color = if let Some(color) = raw_color {
+            color.to_string()
+        } else {
+            let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
+            if let Some(caps) = re.captures(&style) {
+                caps["color"].to_string()
+            } else {
+                "no_value".to_string()
+            }
+        };
         // removing html stuff from text
         let fragment = scraper::Html::parse_fragment(raw_value);
         let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
@@ -106,9 +133,6 @@ impl<'a> DiagramElement<'a> {
             .collect();
         let value = text_vec.join(" ");
 
-        let color_r = 0;
-        let color_g = 0;
-        let color_b = 0;
         let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
         let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
 
@@ -120,13 +144,11 @@ impl<'a> DiagramElement<'a> {
 
         log::debug!("FINISH diagram element processing");
         Self {
+            element_type,
             id,
             parent_id,
             value,
-            element_type,
-            color_r,
-            color_g,
-            color_b,
+            text_color,
             source_id,
             target_id,
             diagram_page_n,
