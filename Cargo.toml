@@ -1,7 +1,7 @@
 [package]
 name = "tarpar"
 description = "Tool for parcing drawio xml file and generate list of objects in text form"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2021"
 authors = ["Andrew Bizyaev <andrew.bizyaev@gmail.com>"]
 
