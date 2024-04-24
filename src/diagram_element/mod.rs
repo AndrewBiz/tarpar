@@ -43,15 +43,15 @@ pub struct DiagramElement<'a> {
 
 // **************************************
 fn get_element_type(style: &str) -> ElementType {
-    if style.contains("group;") {
+    if style.contains("group") {
         ElementType::Group
     } else if style.contains("text;") {
         ElementType::TextBlock
-    } else if style.contains("swimlane;") {
+    } else if style.contains("swimlane") {
         ElementType::System
     } else if style.contains("edgeStyle=") {
         ElementType::Link
-    } else if style.contains("edgeLabel;") {
+    } else if style.contains("edgeLabel") {
         ElementType::LinkLabel
     } else if style.contains("shape=") {
         let re = Regex::new(r"shape=(?<shape_name>[A-Za-z0-9._]+);").unwrap();
