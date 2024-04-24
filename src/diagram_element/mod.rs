@@ -92,8 +92,13 @@ impl<'a> DiagramElement<'a> {
         );
         let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
         let html_node = fragment.select(&html_selector).next().unwrap();
-        let text_vec = html_node.text().collect::<Vec<_>>();
-        // TODO trim whitespaces in each piece of text: \u{a0} \t
+        let text_vec: Vec<&str> = html_node
+            .text()
+            .collect::<Vec<_>>()
+            .iter()
+            .map(|x| x.trim())
+            .collect();
+
         let value = text_vec.join(" ");
 
         let color_r = 0;
