@@ -126,23 +126,23 @@ fn main() -> Result<()> {
             }
             // export elements
             println!(
-                "sort;\"id\";\"type\";\"value\";\"text_color\";\"parent\";\"layer\";\"diagram\";\"drawio\";"
+                "sort;\"type\";\"value\";\"text_color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";",
+                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
-                    e_val.id,
                     e_val.element_type,
                     e_val.value,
                     e_val.text_color,
-                    e_val.parent_id,
                     e_val.layer,
                     e_val.diagram_page_n,
                     e_val.diagram_page_name,
                     e_val.drawio_host,
                     e_val.drawio_version,
+                    e_val.id,
+                    e_val.parent_id,
                 );
             }
         }
