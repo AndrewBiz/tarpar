@@ -1,5 +1,9 @@
 use regex::Regex;
 use roxmltree::Node;
+use tarpar::{
+    ACTION_CREATE, ACTION_ERROR, ACTION_MODIFY, ACTION_REMOVE, ACTION_USE, COLOR_BLACK, COLOR_BLUE,
+    COLOR_GREEN, COLOR_RED,
+};
 
 // **************************************
 #[derive(Debug)]
@@ -26,6 +30,7 @@ pub struct DiagramElement<'a> {
     pub parent_id: &'a str,
     pub value: String,
     pub color: String,
+    pub action: &'a str,
     // tags: &'a str,
     // tooltip: &'a str,
     // cluster: &'a str,
@@ -126,8 +131,17 @@ impl<'a> DiagramElement<'a> {
             tarpar::NO_VALUE
         };
 
-        // reading text color
+        // reading color
         let color = get_text_color(style, raw_value);
+
+        // action
+        let action = match color.as_str() {
+            COLOR_BLACK => ACTION_USE,
+            COLOR_GREEN => ACTION_CREATE,
+            COLOR_BLUE => ACTION_MODIFY,
+            COLOR_RED => ACTION_REMOVE,
+            _ => ACTION_ERROR,
+        };
 
         // removing html stuff from text
         let fragment = scraper::Html::parse_fragment(raw_value);
@@ -158,6 +172,7 @@ impl<'a> DiagramElement<'a> {
             parent_id,
             value,
             color,
+            action,
             source_id,
             target_id,
             diagram_page_n,
