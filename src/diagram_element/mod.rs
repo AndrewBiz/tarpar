@@ -25,12 +25,10 @@ pub struct DiagramElement<'a> {
     pub id: &'a str,
     pub parent_id: &'a str,
     pub value: String,
-    pub text_color: String,
-    // color_style: &'a str,
-    // color_text: &'a str,
-    // label: &'a str,
+    pub color: String,
     // tags: &'a str,
     // tooltip: &'a str,
+    // cluster: &'a str,
     pub source_id: &'a str,
     pub target_id: &'a str,
     pub diagram_page_n: u8,
@@ -63,6 +61,44 @@ fn get_element_type(style: &str) -> ElementType {
         ElementType::Area
     }
 }
+// **************************************
+fn get_text_color(style: &str, raw_value: &str) -> String {
+    // try read font color from html (font tag)
+    let html_fragment = scraper::Html::parse_fragment(raw_value);
+    let html_selector = scraper::Selector::parse(r#"font"#).unwrap();
+    let text_color1 = if let Some(html_node) = html_fragment.select(&html_selector).next() {
+        if let Some(font_color) = html_node.value().attr("color") {
+            Some(font_color.to_string())
+        } else {
+            None
+        }
+    } else {
+        None
+    };
+    // TODO try read font color from html (rgb tag)
+    // example "<span style=\"border-color: var(--border-color); caret-color: rgb(0, 153, 0); color: rgb(0, 153, 0); font-size: 13px;\">- Динамика ТП&nbsp;</span>"
+    let text_color2: Option<String> = None;
+
+    // try read font color from style (fontColor tag)
+    let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
+    let text_color3: Option<String> = if let Some(caps) = re.captures(&style) {
+        Some(caps["color"].to_string())
+    } else {
+        None
+    };
+
+    // get color
+    let color = if let Some(color1) = text_color1 {
+        color1.to_uppercase()
+    } else if let Some(color2) = text_color2 {
+        color2.to_uppercase()
+    } else if let Some(color3) = text_color3 {
+        color3.to_uppercase()
+    } else {
+        "default".to_string()
+    };
+    color
+}
 
 // **************************************
 impl<'a> DiagramElement<'a> {
@@ -89,30 +125,10 @@ impl<'a> DiagramElement<'a> {
         } else {
             tarpar::NO_VALUE
         };
-        // TODO reading text color
-        // try read font color from html
-        let fragment = scraper::Html::parse_fragment(raw_value);
-        let html_selector = scraper::Selector::parse(r#"font"#).unwrap();
-        let raw_color = if let Some(html_node) = fragment.select(&html_selector).next() {
-            if let Some(font_color) = html_node.value().attr("color") {
-                Some(font_color)
-            } else {
-                None
-            }
-        } else {
-            None
-        };
-        // try read font color from style
-        let text_color = if let Some(color) = raw_color {
-            color.to_string()
-        } else {
-            let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
-            if let Some(caps) = re.captures(&style) {
-                caps["color"].to_string()
-            } else {
-                "no_value".to_string()
-            }
-        };
+
+        // reading text color
+        let color = get_text_color(style, raw_value);
+
         // removing html stuff from text
         let fragment = scraper::Html::parse_fragment(raw_value);
         let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
@@ -141,7 +157,7 @@ impl<'a> DiagramElement<'a> {
             id,
             parent_id,
             value,
-            text_color,
+            color,
             source_id,
             target_id,
             diagram_page_n,

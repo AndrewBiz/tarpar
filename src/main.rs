@@ -135,7 +135,7 @@ fn main() -> Result<()> {
                     e_val.sort,
                     e_val.element_type,
                     e_val.value,
-                    e_val.text_color,
+                    e_val.color,
                     e_val.layer,
                     e_val.diagram_page_n,
                     e_val.diagram_page_name,
