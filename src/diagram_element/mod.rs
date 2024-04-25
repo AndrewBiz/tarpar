@@ -21,6 +21,7 @@ pub enum ElementType {
 #[derive(Debug)]
 pub struct DiagramElement<'a> {
     pub element_type: ElementType,
+    pub sort: u32,
     pub id: &'a str,
     pub parent_id: &'a str,
     pub value: String,
@@ -34,7 +35,7 @@ pub struct DiagramElement<'a> {
     pub target_id: &'a str,
     pub diagram_page_n: u8,
     pub diagram_page_name: &'a str,
-    pub layer_n: u8,
+    pub layer: String,
     pub drawio_host: &'a str,
     pub drawio_version: &'a str,
 }
@@ -74,21 +75,12 @@ impl<'a> DiagramElement<'a> {
         let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
 
         // Checking out the type of element
-        // let style;
-        // let element_type;
         let (style, element_type) = if let Some(style) = raw_element.attribute("style") {
             (style, get_element_type(style))
         } else {
             (tarpar::NO_VALUE, ElementType::None)
         };
 
-        // match raw_element.attribute("style") {
-        //     Some(style) => element_type = get_element_type(style),
-        //     None => {
-        //         style = tarpar::NO_VALUE;
-        //         element_type = ElementType::None
-        //     }
-        // }
         // reading text value (try value then label)
         let raw_value = if let Some(value) = raw_element.attribute("value") {
             value
@@ -135,16 +127,17 @@ impl<'a> DiagramElement<'a> {
 
         let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
         let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
-
+        let sort = 0;
         let diagram_page_n: u8 = 0;
         let diagram_page_name = "";
-        let layer_n = 0;
+        let layer = "".to_string();
         let drawio_host = "";
         let drawio_version = "";
 
         log::debug!("FINISH diagram element processing");
         Self {
             element_type,
+            sort,
             id,
             parent_id,
             value,
@@ -153,7 +146,7 @@ impl<'a> DiagramElement<'a> {
             target_id,
             diagram_page_n,
             diagram_page_name,
-            layer_n,
+            layer,
             drawio_host,
             drawio_version,
         }

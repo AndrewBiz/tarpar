@@ -4,7 +4,6 @@ use crate::diagram_element::ElementType;
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use roxmltree::Node;
-use std::collections::HashMap;
 
 use crate::diagram_element::DiagramElement;
 
@@ -28,7 +27,9 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
     let mut elements = Vec::new();
 
     let mut top_element_id = "";
+    let mut sort: u32 = 0;
     let mut current_layer_n: u8 = 0;
+    let mut current_layer = String::new();
 
     if let Some(diagram_root) = diagram.first_element_child() {
         if let Some(diagram_root) = diagram_root.first_element_child() {
@@ -37,6 +38,8 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
                     match raw_element.tag_name().name() {
                         "mxCell" => {
                             let mut element = DiagramElement::read_mxcell(raw_element);
+                            element.sort = sort;
+                            sort += 1;
                             element.diagram_page_name = page_name;
                             // save 1st - root element
                             if element.parent_id == tarpar::NO_VALUE {
@@ -47,8 +50,13 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
                             if element.parent_id == top_element_id {
                                 element.element_type = ElementType::Layer;
                                 current_layer_n += 1;
+                                if element.value == tarpar::NO_VALUE {
+                                    element.value = "background".to_string();
+                                }
+                                current_layer =
+                                    format!("{:02} ({})", current_layer_n, element.value);
                             }
-                            element.layer_n = current_layer_n;
+                            element.layer = current_layer.clone();
 
                             elements.push(element);
                         }
@@ -118,17 +126,19 @@ fn main() -> Result<()> {
             }
             // export elements
             println!(
-                "\"id\";\"type\";\"value\";\"text_color\";\"parent\";\"layer\";\"diagram\";\"drawio\";"
+                "sort;\"id\";\"type\";\"value\";\"text_color\";\"parent\";\"layer\";\"diagram\";\"drawio\";"
             );
             for e_val in &elements {
                 println!(
-                    "\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"слой {}\";\"{}-{}\";\"{}-{}\";",
+                    "{:02}{:04};\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";",
+                    e_val.diagram_page_n,
+                    e_val.sort,
                     e_val.id,
                     e_val.element_type,
                     e_val.value,
                     e_val.text_color,
                     e_val.parent_id,
-                    e_val.layer_n,
+                    e_val.layer,
                     e_val.diagram_page_n,
                     e_val.diagram_page_name,
                     e_val.drawio_host,
