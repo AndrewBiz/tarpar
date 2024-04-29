@@ -136,7 +136,7 @@ impl<'a> DiagramElement<'a> {
 
         // action
         let action = match color.as_str() {
-            COLOR_BLACK => ACTION_USE,
+            COLOR_BLACK | "default" => ACTION_USE,
             COLOR_GREEN => ACTION_CREATE,
             COLOR_BLUE => ACTION_MODIFY,
             COLOR_RED => ACTION_REMOVE,
