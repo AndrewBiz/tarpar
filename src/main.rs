@@ -126,7 +126,7 @@ fn main() -> Result<()> {
             }
             // export elements
             println!(
-                "sort;\"type\";\"value\";\"action\";\"text_color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"type\";\"value\";\"action\";\"color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
