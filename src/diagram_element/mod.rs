@@ -107,79 +107,92 @@ fn get_text_color(style: &str, raw_value: &str) -> String {
 
 // **************************************
 impl<'a> DiagramElement<'a> {
-    pub fn read_mxcell(raw_element: Node<'a, 'a>) -> DiagramElement<'a> {
-        log::debug!("START diagram element processing");
+    pub fn get(raw_element: Node<'a, 'a>) -> Option<DiagramElement<'a>> {
+        let raw_element_name = raw_element.tag_name().name();
+        log::debug!("START diagram element processing {}", raw_element_name);
 
-        let id = raw_element.attribute("id").unwrap_or(tarpar::NO_VALUE);
-        log::debug!("tag_name: {}, ID: {}", raw_element.tag_name().name(), id,);
+        let result = match raw_element_name {
+            "mxCell" | "UserObject" => {
+                // Reading raw tag values
+                // ID
+                let id = raw_element.attribute("id").unwrap_or(tarpar::NO_VALUE);
+                log::debug!("ID: {}", id,);
+                // VALUE (LABEL)
+                let raw_value = if let Some(value) = raw_element.attribute("value") {
+                    value
+                } else if let Some(label) = raw_element.attribute("label") {
+                    label
+                } else {
+                    tarpar::NO_VALUE
+                };
 
-        let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
+                let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
 
-        // Checking out the type of element
-        let (style, element_type) = if let Some(style) = raw_element.attribute("style") {
-            (style, get_element_type(style))
-        } else {
-            (tarpar::NO_VALUE, ElementType::None)
+                // Checking out the type of element
+                let (style, element_type) = if let Some(style) = raw_element.attribute("style") {
+                    log::debug!("style: {:?}", style);
+                    (style, get_element_type(style))
+                } else {
+                    log::debug!("style not set");
+                    (tarpar::NO_VALUE, ElementType::None)
+                };
+
+                // reading color
+                let color = get_text_color(style, raw_value);
+
+                // action
+                let action = match color.as_str() {
+                    COLOR_BLACK | "default" => ACTION_USE,
+                    COLOR_GREEN => ACTION_CREATE,
+                    COLOR_BLUE => ACTION_MODIFY,
+                    COLOR_RED => ACTION_REMOVE,
+                    _ => ACTION_ERROR,
+                };
+
+                // removing html stuff from text
+                let fragment = scraper::Html::parse_fragment(raw_value);
+                let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
+                let html_node = fragment.select(&html_selector).next().unwrap();
+                let text_vec: Vec<&str> = html_node
+                    .text()
+                    .collect::<Vec<_>>()
+                    .iter()
+                    .map(|x| x.trim())
+                    .collect();
+                let value = text_vec.join(" ");
+
+                let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
+                let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
+                let sort = 0;
+                let diagram_page_n: u8 = 0;
+                let diagram_page_name = "";
+                let layer = "".to_string();
+                let drawio_host = "";
+                let drawio_version = "";
+
+                Some(Self {
+                    element_type,
+                    sort,
+                    id,
+                    parent_id,
+                    value,
+                    color,
+                    action,
+                    source_id,
+                    target_id,
+                    diagram_page_n,
+                    diagram_page_name,
+                    layer,
+                    drawio_host,
+                    drawio_version,
+                })
+            }
+            &_ => {
+                log::debug!("unknown drawio element - skipping",);
+                None
+            }
         };
-
-        // reading text value (try value then label)
-        let raw_value = if let Some(value) = raw_element.attribute("value") {
-            value
-        } else if let Some(label) = raw_element.attribute("label") {
-            label
-        } else {
-            tarpar::NO_VALUE
-        };
-
-        // reading color
-        let color = get_text_color(style, raw_value);
-
-        // action
-        let action = match color.as_str() {
-            COLOR_BLACK | "default" => ACTION_USE,
-            COLOR_GREEN => ACTION_CREATE,
-            COLOR_BLUE => ACTION_MODIFY,
-            COLOR_RED => ACTION_REMOVE,
-            _ => ACTION_ERROR,
-        };
-
-        // removing html stuff from text
-        let fragment = scraper::Html::parse_fragment(raw_value);
-        let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
-        let html_node = fragment.select(&html_selector).next().unwrap();
-        let text_vec: Vec<&str> = html_node
-            .text()
-            .collect::<Vec<_>>()
-            .iter()
-            .map(|x| x.trim())
-            .collect();
-        let value = text_vec.join(" ");
-
-        let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
-        let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
-        let sort = 0;
-        let diagram_page_n: u8 = 0;
-        let diagram_page_name = "";
-        let layer = "".to_string();
-        let drawio_host = "";
-        let drawio_version = "";
-
         log::debug!("FINISH diagram element processing");
-        Self {
-            element_type,
-            sort,
-            id,
-            parent_id,
-            value,
-            color,
-            action,
-            source_id,
-            target_id,
-            diagram_page_n,
-            diagram_page_name,
-            layer,
-            drawio_host,
-            drawio_version,
-        }
+        result
     }
 }

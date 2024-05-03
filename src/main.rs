@@ -35,40 +35,26 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
         if let Some(diagram_root) = diagram_root.first_element_child() {
             for raw_element in diagram_root.children() {
                 if raw_element.is_element() {
-                    match raw_element.tag_name().name() {
-                        "mxCell" => {
-                            let mut element = DiagramElement::read_mxcell(raw_element);
-                            element.sort = sort;
-                            sort += 1;
-                            element.diagram_page_name = page_name;
-                            // save 1st - root element
-                            if element.parent_id == tarpar::NO_VALUE {
-                                top_element_id = element.id;
-                                element.element_type = ElementType::Top;
+                    if let Some(mut element) = DiagramElement::get(raw_element) {
+                        element.sort = sort;
+                        sort += 1;
+                        element.diagram_page_name = page_name;
+                        // save 1st - root element
+                        if element.parent_id == tarpar::NO_VALUE {
+                            top_element_id = element.id;
+                            element.element_type = ElementType::Top;
+                        }
+                        // check if element is layer
+                        if element.parent_id == top_element_id {
+                            element.element_type = ElementType::Layer;
+                            current_layer_n += 1;
+                            if element.value == tarpar::NO_VALUE {
+                                element.value = "background".to_string();
                             }
-                            // check if element is layer
-                            if element.parent_id == top_element_id {
-                                element.element_type = ElementType::Layer;
-                                current_layer_n += 1;
-                                if element.value == tarpar::NO_VALUE {
-                                    element.value = "background".to_string();
-                                }
-                                current_layer =
-                                    format!("{:02} ({})", current_layer_n, element.value);
-                            }
-                            element.layer = current_layer.clone();
-
-                            elements.push(element);
+                            current_layer = format!("{:02} ({})", current_layer_n, element.value);
                         }
-                        "UserObject" => {
-                            // println!("UserObject: {:?}", element.attributes())
-                        }
-                        &_ => {
-                            log::debug!(
-                                "unknown element: {} - skipping",
-                                raw_element.tag_name().name()
-                            );
-                        }
+                        element.layer = current_layer.clone();
+                        elements.push(element);
                     }
                 }
             }
