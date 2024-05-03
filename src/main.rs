@@ -112,16 +112,20 @@ fn main() -> Result<()> {
             }
             // export elements
             println!(
-                "sort;\"type\";\"value\";\"action\";\"color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
+                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
                     e_val.element_type,
                     e_val.value,
                     e_val.action,
+                    e_val.tags,
+                    e_val.tooltip,
+                    e_val.cluster,
+                    e_val.jira,
                     e_val.color,
                     e_val.layer,
                     e_val.diagram_page_n,

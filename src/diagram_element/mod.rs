@@ -31,9 +31,10 @@ pub struct DiagramElement<'a> {
     pub value: String,
     pub color: String,
     pub action: &'a str,
-    // tags: &'a str,
-    // tooltip: &'a str,
-    // cluster: &'a str,
+    pub tags: &'a str,
+    pub tooltip: &'a str,
+    pub cluster: &'a str,
+    pub jira: &'a str,
     pub source_id: &'a str,
     pub target_id: &'a str,
     pub diagram_page_n: u8,
@@ -117,6 +118,7 @@ impl<'a> DiagramElement<'a> {
                 // ID
                 let id = raw_element.attribute("id").unwrap_or(tarpar::NO_VALUE);
                 log::debug!("ID: {}", id,);
+
                 // VALUE (LABEL)
                 let raw_value = if let Some(value) = raw_element.attribute("value") {
                     value
@@ -124,6 +126,26 @@ impl<'a> DiagramElement<'a> {
                     label
                 } else {
                     tarpar::NO_VALUE
+                };
+
+                // TAGS, TOOLTIP, CLUSTER, JIRA
+                let (tags, tooltip, cluster, jira) = if raw_element_name == "UserObject" {
+                    // TAGS
+                    let tags = raw_element.attribute("tags").unwrap_or(tarpar::NO_VALUE);
+                    // TOOLTIP
+                    let tooltip = raw_element.attribute("tooltip").unwrap_or(tarpar::NO_VALUE);
+                    // CLUSTER
+                    let cluster = raw_element.attribute("cluster").unwrap_or(tarpar::NO_VALUE);
+                    // JIRA
+                    let jira = raw_element.attribute("jira").unwrap_or(tarpar::NO_VALUE);
+                    (tags, tooltip, cluster, jira)
+                } else {
+                    (
+                        tarpar::NO_VALUE,
+                        tarpar::NO_VALUE,
+                        tarpar::NO_VALUE,
+                        tarpar::NO_VALUE,
+                    )
                 };
 
                 let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
@@ -178,6 +200,10 @@ impl<'a> DiagramElement<'a> {
                     value,
                     color,
                     action,
+                    tags,
+                    tooltip,
+                    cluster,
+                    jira,
                     source_id,
                     target_id,
                     diagram_page_n,
