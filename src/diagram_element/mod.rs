@@ -46,7 +46,9 @@ pub struct DiagramElement<'a> {
 
 // **************************************
 fn get_element_type(style: &str) -> ElementType {
-    if style.contains("group") {
+    if style == tarpar::NO_VALUE {
+        ElementType::None
+    } else if style.contains("group") {
         ElementType::Group
     } else if style.contains("text;") {
         ElementType::TextBlock
@@ -67,6 +69,7 @@ fn get_element_type(style: &str) -> ElementType {
         ElementType::Area
     }
 }
+
 // **************************************
 fn get_text_color(style: &str, raw_value: &str) -> String {
     // try read font color from html (font tag)
@@ -148,19 +151,32 @@ impl<'a> DiagramElement<'a> {
                     )
                 };
 
-                let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
-
-                // Checking out the type of element
-                let (style, element_type) = if let Some(style) = raw_element.attribute("style") {
-                    log::debug!("style: {:?}", style);
-                    (style, get_element_type(style))
+                // STYLE, PARENT, SOURCE, TARGET
+                // getting correct mxCell
+                let raw_element = if raw_element_name == "UserObject" {
+                    match raw_element.first_element_child() {
+                        Some(child_element) => child_element,
+                        None => raw_element,
+                    }
                 } else {
-                    log::debug!("style not set");
-                    (tarpar::NO_VALUE, ElementType::None)
+                    raw_element
                 };
 
+                // STYLE
+                let raw_style = raw_element.attribute("style").unwrap_or(tarpar::NO_VALUE);
+                // PARENT
+                let parent_id = raw_element.attribute("parent").unwrap_or(tarpar::NO_VALUE);
+                // SOURCE
+                let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
+                // TARGET
+                let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
+
+                // TODO postprocessing
+                // Checking out the type of element
+                let element_type = get_element_type(raw_style);
+
                 // reading color
-                let color = get_text_color(style, raw_value);
+                let color = get_text_color(raw_style, raw_value);
 
                 // action
                 let action = match color.as_str() {
@@ -183,8 +199,6 @@ impl<'a> DiagramElement<'a> {
                     .collect();
                 let value = text_vec.join(" ");
 
-                let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
-                let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
                 let sort = 0;
                 let diagram_page_n: u8 = 0;
                 let diagram_page_name = "";
