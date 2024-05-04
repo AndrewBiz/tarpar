@@ -135,6 +135,24 @@ fn main() -> Result<()> {
                 }
             }
 
+            // process integrations
+            let mut current_link_id = "";
+            let mut current_object = "".to_string();
+            for e_val in elements.iter_mut() {
+                if e_val.element_type == ElementType::Link {
+                    current_link_id = e_val.id;
+                    current_object =
+                        format!("Интеграция {} --> {}", e_val.source_id, e_val.target_id);
+                    e_val.object = current_object.clone();
+                    continue;
+                };
+                if (e_val.element_type == ElementType::LinkLabel)
+                    | (e_val.parent_id == current_link_id)
+                {
+                    e_val.object = current_object.clone();
+                }
+            }
+
             // TODO refactor action
             // let action = match color_text.as_str() {
             //     COLOR_BLACK | "default" => ACTION_USE,
