@@ -1,12 +1,8 @@
 use regex::Regex;
 use roxmltree::Node;
-use tarpar::{
-    ACTION_CREATE, ACTION_ERROR, ACTION_MODIFY, ACTION_REMOVE, ACTION_USE, COLOR_BLACK, COLOR_BLUE,
-    COLOR_GREEN, COLOR_RED,
-};
 
 // **************************************
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum ElementType {
     Top,
     Layer,
@@ -14,7 +10,7 @@ pub enum ElementType {
     Group,
     TextBlock,
     System,
-    // SystemFunction,
+    SystemFunction,
     Link,
     LinkLabel,
     Shape(String),
@@ -24,6 +20,7 @@ pub enum ElementType {
 // **************************************
 #[derive(Debug)]
 pub struct DiagramElement<'a> {
+    pub object: String,
     pub element_type: ElementType,
     pub sort: u32,
     pub id: &'a str,
@@ -182,25 +179,16 @@ impl<'a> DiagramElement<'a> {
                 let source_id = raw_element.attribute("source").unwrap_or(tarpar::NO_VALUE);
                 // TARGET
                 let target_id = raw_element.attribute("target").unwrap_or(tarpar::NO_VALUE);
+                // COLOR_TEXT
+                let color_text = get_text_color(raw_style, raw_value);
+                // COLOR_LINE
+                let color_line = get_line_color(raw_style);
 
                 // TODO postprocessing
                 // Checking out the type of element
                 let element_type = get_element_type(raw_style);
 
-                // reading color
-                let color_text = get_text_color(raw_style, raw_value);
-                let color_line = get_line_color(raw_style);
-
-                // TODO refactor action
-                let action = match color_text.as_str() {
-                    COLOR_BLACK | "default" => ACTION_USE,
-                    COLOR_GREEN => ACTION_CREATE,
-                    COLOR_BLUE => ACTION_MODIFY,
-                    COLOR_RED => ACTION_REMOVE,
-                    _ => ACTION_ERROR,
-                };
-
-                // removing html stuff from text
+                // removing html stuff from text - get pure text for value
                 let fragment = scraper::Html::parse_fragment(raw_value);
                 let html_selector = scraper::Selector::parse(r#"html"#).unwrap();
                 let html_node = fragment.select(&html_selector).next().unwrap();
@@ -212,14 +200,18 @@ impl<'a> DiagramElement<'a> {
                     .collect();
                 let value = text_vec.join(" ");
 
+                // rest of fields (will be set later)
+                let object = "".to_string();
                 let sort = 0;
                 let diagram_page_n: u8 = 0;
                 let diagram_page_name = "";
                 let layer = "".to_string();
+                let action = "";
                 let drawio_host = "";
                 let drawio_version = "";
 
                 Some(Self {
+                    object,
                     element_type,
                     sort,
                     id,

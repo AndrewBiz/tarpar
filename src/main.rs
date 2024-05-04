@@ -4,6 +4,10 @@ use crate::diagram_element::ElementType;
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use roxmltree::Node;
+// use tarpar::{
+//     ACTION_CREATE, ACTION_ERROR, ACTION_MODIFY, ACTION_REMOVE, ACTION_USE, COLOR_BLACK, COLOR_BLUE,
+//     COLOR_GREEN, COLOR_RED,
+// };
 
 use crate::diagram_element::DiagramElement;
 
@@ -36,15 +40,17 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
             for raw_element in diagram_root.children() {
                 if raw_element.is_element() {
                     if let Some(mut element) = DiagramElement::get(raw_element) {
-                        element.sort = sort;
-                        sort += 1;
-                        element.diagram_page_name = page_name;
-                        // save 1st - root element
+                        // save 1st - ROOT element
                         if element.parent_id == tarpar::NO_VALUE {
                             top_element_id = element.id;
                             element.element_type = ElementType::Top;
                         }
-                        // check if element is layer
+                        // SORT
+                        element.sort = sort;
+                        sort += 1;
+                        // DIAGRAM_NAME
+                        element.diagram_page_name = page_name;
+                        // LAYER
                         if element.parent_id == top_element_id {
                             element.element_type = ElementType::Layer;
                             current_layer_n += 1;
@@ -104,21 +110,50 @@ fn main() -> Result<()> {
             diagram_page_n += 1;
             let mut elements: Vec<DiagramElement<'_>> = read_diagram(child);
 
-            // process elements
+            // post processing
+            // set fields
             for e_val in elements.iter_mut() {
                 e_val.diagram_page_n = diagram_page_n;
                 e_val.drawio_host = drawio_host;
                 e_val.drawio_version = drawio_version;
             }
+            // process systems
+            let mut current_system_id = "";
+            let mut current_object = "".to_string();
+            for e_val in elements.iter_mut() {
+                if e_val.element_type == ElementType::System {
+                    current_system_id = e_val.id;
+                    current_object = format!("Система '{}'", e_val.value);
+                    e_val.object = current_object.clone();
+                    continue;
+                };
+                if (e_val.element_type == ElementType::TextBlock)
+                    | (e_val.parent_id == current_system_id)
+                {
+                    e_val.object = current_object.clone();
+                    e_val.element_type = ElementType::SystemFunction;
+                }
+            }
+
+            // TODO refactor action
+            // let action = match color_text.as_str() {
+            //     COLOR_BLACK | "default" => ACTION_USE,
+            //     COLOR_GREEN => ACTION_CREATE,
+            //     COLOR_BLUE => ACTION_MODIFY,
+            //     COLOR_RED => ACTION_REMOVE,
+            //     _ => ACTION_ERROR,
+            // };
+
             // export elements
             println!(
-                "sort;\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"object\";\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
+                    "{:02}{:04};\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
+                    e_val.object,
                     e_val.element_type,
                     e_val.value,
                     e_val.action,
