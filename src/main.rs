@@ -112,11 +112,11 @@ fn main() -> Result<()> {
             }
             // export elements
             println!(
-                "sort;\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
+                    "{:02}{:04};\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
                     e_val.element_type,
@@ -126,7 +126,8 @@ fn main() -> Result<()> {
                     e_val.tooltip,
                     e_val.cluster,
                     e_val.jira,
-                    e_val.color,
+                    e_val.color_text,
+                    e_val.color_line,
                     e_val.layer,
                     e_val.diagram_page_n,
                     e_val.diagram_page_name,

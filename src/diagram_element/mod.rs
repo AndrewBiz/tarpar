@@ -29,7 +29,8 @@ pub struct DiagramElement<'a> {
     pub id: &'a str,
     pub parent_id: &'a str,
     pub value: String,
-    pub color: String,
+    pub color_text: String,
+    pub color_line: String,
     pub action: &'a str,
     pub tags: &'a str,
     pub tooltip: &'a str,
@@ -71,7 +72,7 @@ fn get_element_type(style: &str) -> ElementType {
 }
 
 // **************************************
-fn get_text_color(style: &str, raw_value: &str) -> String {
+fn get_text_color(raw_style: &str, raw_value: &str) -> String {
     // try read font color from html (font tag)
     let html_fragment = scraper::Html::parse_fragment(raw_value);
     let html_selector = scraper::Selector::parse(r#"font"#).unwrap();
@@ -90,7 +91,7 @@ fn get_text_color(style: &str, raw_value: &str) -> String {
 
     // try read font color from style (fontColor tag)
     let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
-    let text_color3: Option<String> = if let Some(caps) = re.captures(&style) {
+    let text_color3: Option<String> = if let Some(caps) = re.captures(&raw_style) {
         Some(caps["color"].to_string())
     } else {
         None
@@ -107,6 +108,17 @@ fn get_text_color(style: &str, raw_value: &str) -> String {
         "default".to_string()
     };
     color
+}
+
+// **************************************
+fn get_line_color(raw_style: &str) -> String {
+    // try read line color from style (strokeColor tag)
+    let re = Regex::new(r"strokeColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
+    if let Some(caps) = re.captures(&raw_style) {
+        caps["color"].to_string().to_uppercase()
+    } else {
+        "default".to_string()
+    }
 }
 
 // **************************************
@@ -176,10 +188,11 @@ impl<'a> DiagramElement<'a> {
                 let element_type = get_element_type(raw_style);
 
                 // reading color
-                let color = get_text_color(raw_style, raw_value);
+                let color_text = get_text_color(raw_style, raw_value);
+                let color_line = get_line_color(raw_style);
 
-                // action
-                let action = match color.as_str() {
+                // TODO refactor action
+                let action = match color_text.as_str() {
                     COLOR_BLACK | "default" => ACTION_USE,
                     COLOR_GREEN => ACTION_CREATE,
                     COLOR_BLUE => ACTION_MODIFY,
@@ -212,7 +225,8 @@ impl<'a> DiagramElement<'a> {
                     id,
                     parent_id,
                     value,
-                    color,
+                    color_text,
+                    color_line,
                     action,
                     tags,
                     tooltip,
