@@ -20,6 +20,7 @@ pub enum ElementType {
 // **************************************
 #[derive(Debug)]
 pub struct DiagramElement<'a> {
+    pub object_type: String,
     pub object: String,
     pub element_type: ElementType,
     pub sort: u32,
@@ -201,6 +202,7 @@ impl<'a> DiagramElement<'a> {
                 let value = text_vec.join(" ");
 
                 // rest of fields (will be set later)
+                let object_type = "".to_string();
                 let object = "".to_string();
                 let sort = 0;
                 let diagram_page_n: u8 = 0;
@@ -211,6 +213,7 @@ impl<'a> DiagramElement<'a> {
                 let drawio_version = "";
 
                 Some(Self {
+                    object_type,
                     object,
                     element_type,
                     sort,

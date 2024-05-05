@@ -123,11 +123,14 @@ fn main() -> Result<()> {
             // process systems
             let mut current_system_id = "";
             let mut current_object = "".to_string();
+            let mut current_object_type = "".to_string();
             for e_val in elements.iter_mut() {
                 if e_val.element_type == ElementType::System {
                     current_system_id = e_val.id;
                     current_object = format!("{}", e_val.value);
                     e_val.object = current_object.clone();
+                    current_object_type = format!("Система");
+                    e_val.object_type = current_object_type.clone();
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
@@ -140,6 +143,7 @@ fn main() -> Result<()> {
                     | (e_val.parent_id == current_system_id)
                 {
                     e_val.object = current_object.clone();
+                    e_val.object_type = current_object_type.clone();
                     e_val.element_type = ElementType::SystemFunction;
                     indexed_elements.insert(
                         e_val.id,
@@ -153,6 +157,7 @@ fn main() -> Result<()> {
             // process integrations
             let mut current_link_id = "";
             let mut current_object = "".to_string();
+            let mut current_object_type = "".to_string();
             for e_val in elements.iter_mut() {
                 if e_val.element_type == ElementType::Link {
                     current_link_id = e_val.id;
@@ -166,14 +171,17 @@ fn main() -> Result<()> {
                     } else {
                         "___".to_string()
                     };
-                    current_object = format!("Интеграция {} --> {}", source_object, target_object);
+                    current_object = format!("{} --> {}", source_object, target_object);
                     e_val.object = current_object.clone();
+                    current_object_type = format!("Интеграция");
+                    e_val.object_type = current_object_type.clone();
                     continue;
                 };
                 if (e_val.element_type == ElementType::LinkLabel)
                     | (e_val.parent_id == current_link_id)
                 {
                     e_val.object = current_object.clone();
+                    e_val.object_type = current_object_type.clone();
                 }
             }
 
@@ -188,21 +196,22 @@ fn main() -> Result<()> {
 
             // export elements
             println!(
-                "sort;\"object\";\"type\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"object type\";\"object\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"type\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
+                    "{:02}{:04};\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
+                    e_val.object_type,
                     e_val.object,
-                    e_val.element_type,
                     e_val.value,
                     e_val.action,
                     e_val.tags,
                     e_val.tooltip,
                     e_val.cluster,
                     e_val.jira,
+                    e_val.element_type,
                     e_val.color_text,
                     e_val.color_line,
                     e_val.layer,
