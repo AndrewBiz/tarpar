@@ -56,7 +56,7 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
                         if element.parent_id == top_element_id {
                             element.element_type = ElementType::Layer;
                             current_layer_n += 1;
-                            if element.value == tarpar::NO_VALUE {
+                            if element.value == "" {
                                 element.value = "background".to_string();
                             }
                             current_layer = format!("{:02} ({})", current_layer_n, element.value);

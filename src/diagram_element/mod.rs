@@ -142,27 +142,22 @@ impl<'a> DiagramElement<'a> {
                 } else if let Some(label) = raw_element.attribute("label") {
                     label
                 } else {
-                    tarpar::NO_VALUE
+                    ""
                 };
 
                 // TAGS, TOOLTIP, CLUSTER, JIRA
                 let (tags, tooltip, cluster, jira) = if raw_element_name == "UserObject" {
                     // TAGS
-                    let tags = raw_element.attribute("tags").unwrap_or(tarpar::NO_VALUE);
+                    let tags = raw_element.attribute("tags").unwrap_or("");
                     // TOOLTIP
-                    let tooltip = raw_element.attribute("tooltip").unwrap_or(tarpar::NO_VALUE);
+                    let tooltip = raw_element.attribute("tooltip").unwrap_or("");
                     // CLUSTER
-                    let cluster = raw_element.attribute("cluster").unwrap_or(tarpar::NO_VALUE);
+                    let cluster = raw_element.attribute("cluster").unwrap_or("");
                     // JIRA
-                    let jira = raw_element.attribute("jira").unwrap_or(tarpar::NO_VALUE);
+                    let jira = raw_element.attribute("jira").unwrap_or("");
                     (tags, tooltip, cluster, jira)
                 } else {
-                    (
-                        tarpar::NO_VALUE,
-                        tarpar::NO_VALUE,
-                        tarpar::NO_VALUE,
-                        tarpar::NO_VALUE,
-                    )
+                    ("", "", "", "")
                 };
 
                 // STYLE, PARENT, SOURCE, TARGET
