@@ -1,6 +1,8 @@
 mod diagram_element;
 
-use crate::diagram_element::ElementType;
+use std::collections::HashMap;
+
+use crate::diagram_element::{DiagramElementShort, ElementType};
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use roxmltree::Node;
@@ -28,7 +30,7 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
     let page_name = diagram.attribute("name").unwrap_or("n/a");
     log::debug!("diagram page name: {}", page_name);
 
-    let mut elements = Vec::new();
+    let mut elements: Vec<DiagramElement<'_>> = Vec::new();
 
     let mut top_element_id = "";
     let mut sort: u32 = 0;
@@ -109,6 +111,7 @@ fn main() -> Result<()> {
             // read one page (diagram)
             diagram_page_n += 1;
             let mut elements: Vec<DiagramElement<'_>> = read_diagram(child);
+            let mut indexed_elements: HashMap<&str, DiagramElementShort> = Default::default();
 
             // post processing
             // set fields
@@ -125,6 +128,12 @@ fn main() -> Result<()> {
                     current_system_id = e_val.id;
                     current_object = format!("Система '{}'", e_val.value);
                     e_val.object = current_object.clone();
+                    indexed_elements.insert(
+                        e_val.id,
+                        DiagramElementShort {
+                            object: e_val.object.clone(),
+                        },
+                    );
                     continue;
                 };
                 if (e_val.element_type == ElementType::TextBlock)
@@ -132,6 +141,12 @@ fn main() -> Result<()> {
                 {
                     e_val.object = current_object.clone();
                     e_val.element_type = ElementType::SystemFunction;
+                    indexed_elements.insert(
+                        e_val.id,
+                        DiagramElementShort {
+                            object: e_val.object.clone(),
+                        },
+                    );
                 }
             }
 
@@ -141,8 +156,17 @@ fn main() -> Result<()> {
             for e_val in elements.iter_mut() {
                 if e_val.element_type == ElementType::Link {
                     current_link_id = e_val.id;
-                    current_object =
-                        format!("Интеграция {} --> {}", e_val.source_id, e_val.target_id);
+                    let source_object = if let Some(e) = indexed_elements.get(e_val.source_id) {
+                        e.object.clone()
+                    } else {
+                        "___".to_string()
+                    };
+                    let target_object = if let Some(e) = indexed_elements.get(e_val.target_id) {
+                        e.object.clone()
+                    } else {
+                        "___".to_string()
+                    };
+                    current_object = format!("Интеграция {} --> {}", source_object, target_object);
                     e_val.object = current_object.clone();
                     continue;
                 };

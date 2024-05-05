@@ -41,6 +41,11 @@ pub struct DiagramElement<'a> {
     pub drawio_host: &'a str,
     pub drawio_version: &'a str,
 }
+// **************************************
+#[derive(Debug)]
+pub struct DiagramElementShort {
+    pub object: String,
+}
 
 // **************************************
 fn get_element_type(style: &str) -> ElementType {
