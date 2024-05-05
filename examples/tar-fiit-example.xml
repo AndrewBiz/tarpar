@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-05-05T08:12:14.405Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="HDSBHSKN9J9nmYXCk9UT" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-05T09:14:05.497Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="kUqNaSYZ3iurRyGxfsqZ" version="24.2.5" type="device">
   <diagram name="17.04.2024" id="Thx3v6olRwI6cNQ1C39S">
-    <mxGraphModel dx="1434" dy="1638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="819" dy="1279" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-0" />
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-1" parent="mCPMpIAHC7OkzRRA2IbE-0" />
@@ -633,13 +633,13 @@
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-134" value="- Цены на материалы" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#000000;" parent="mCPMpIAHC7OkzRRA2IbE-132" vertex="1">
           <mxGeometry y="50" width="240" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="mCPMpIAHC7OkzRRA2IbE-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1.005;entryY=0.68;entryDx=0;entryDy=0;entryPerimeter=0;" parent="mCPMpIAHC7OkzRRA2IbE-1" source="mCPMpIAHC7OkzRRA2IbE-133" edge="1">
+        <mxCell id="mCPMpIAHC7OkzRRA2IbE-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="mCPMpIAHC7OkzRRA2IbE-1" source="mCPMpIAHC7OkzRRA2IbE-133" edge="1" target="mCPMpIAHC7OkzRRA2IbE-121">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="2470" y="458" />
               <mxPoint x="2470" y="200" />
             </Array>
-            <mxPoint x="2452.2" y="200.32000000000016" as="targetPoint" />
+            <mxPoint x="2470" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-136" value="Цены на&amp;nbsp;&lt;br&gt;материалы" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="mCPMpIAHC7OkzRRA2IbE-135" vertex="1" connectable="0">
