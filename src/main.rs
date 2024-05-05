@@ -126,7 +126,7 @@ fn main() -> Result<()> {
             for e_val in elements.iter_mut() {
                 if e_val.element_type == ElementType::System {
                     current_system_id = e_val.id;
-                    current_object = format!("Система '{}'", e_val.value);
+                    current_object = format!("{}", e_val.value);
                     e_val.object = current_object.clone();
                     indexed_elements.insert(
                         e_val.id,
