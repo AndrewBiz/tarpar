@@ -113,8 +113,8 @@ fn main() -> Result<()> {
             let mut elements: Vec<DiagramElement<'_>> = read_diagram(child);
             let mut indexed_elements: HashMap<&str, DiagramElementShort> = Default::default();
 
-            // post processing
-            // set fields
+            // post processing elements
+            // set common fields
             for e_val in elements.iter_mut() {
                 e_val.diagram_page_n = diagram_page_n;
                 e_val.drawio_host = drawio_host;
@@ -131,6 +131,8 @@ fn main() -> Result<()> {
                     e_val.object = current_object.clone();
                     current_object_type = format!("Система");
                     e_val.object_type = current_object_type.clone();
+                    // TODO let color = format!("{}", e_val.color_line);
+                    // e_val.action = tarpar::get_action(&color);
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
@@ -184,15 +186,6 @@ fn main() -> Result<()> {
                     e_val.object_type = current_object_type.clone();
                 }
             }
-
-            // TODO refactor action
-            // let action = match color_text.as_str() {
-            //     COLOR_BLACK | "default" => ACTION_USE,
-            //     COLOR_GREEN => ACTION_CREATE,
-            //     COLOR_BLUE => ACTION_MODIFY,
-            //     COLOR_RED => ACTION_REMOVE,
-            //     _ => ACTION_ERROR,
-            // };
 
             // export elements
             println!(
