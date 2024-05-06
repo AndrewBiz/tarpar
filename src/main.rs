@@ -91,8 +91,6 @@ fn main() -> Result<()> {
     let tree = roxmltree::Document::parse(&text)
         .with_context(|| format!("Failed parcing {} with roxmltree", &cli_args.drawio_file))?;
 
-    // println!("{:?}", tree);
-
     let root_element = tree.root_element();
     if !root_element.has_tag_name("mxfile") {
         return Err(anyhow!("file is not drawio!"));
