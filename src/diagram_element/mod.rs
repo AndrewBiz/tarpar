@@ -185,7 +185,7 @@ impl<'a> DiagramElement<'a> {
                 // COLOR_LINE
                 let color_line = get_line_color(raw_style);
 
-                // TODO postprocessing
+                // postprocessing
                 // Checking out the type of element
                 let element_type = get_element_type(raw_style);
 
