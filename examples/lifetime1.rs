@@ -11,6 +11,32 @@ pub struct Element<'a> {
     pub object_type: &'a str,
 }
 
+impl<'a> Element<'a> {
+    pub fn set_action(&mut self, color_type: &str) -> () {
+        let color = match color_type {
+            "text" => &self.color_text,
+            "line" => &self.color_line,
+            _ => "default",
+        };
+        self.action = match color {
+            tarpar::COLOR_BLACK | "default" => tarpar::ACTION_USE,
+            tarpar::COLOR_GREEN => tarpar::ACTION_CREATE,
+            tarpar::COLOR_BLUE => tarpar::ACTION_MODIFY,
+            tarpar::COLOR_RED => tarpar::ACTION_REMOVE,
+            _ => tarpar::ACTION_ERROR,
+        }
+    }
+}
+
+// fn get_action(color: &String) -> &str {
+//     match color.as_str() {
+//         tarpar::COLOR_BLACK | "default" => tarpar::ACTION_USE,
+//         tarpar::COLOR_GREEN => tarpar::ACTION_CREATE,
+//         tarpar::COLOR_BLUE => tarpar::ACTION_MODIFY,
+//         tarpar::COLOR_RED => tarpar::ACTION_REMOVE,
+//         _ => tarpar::ACTION_ERROR,
+//     }
+// }
 fn main() {
     // println!("Usage:\n\tcargo run --example lifetime1");
 
@@ -19,7 +45,7 @@ fn main() {
     for i in 1..11 {
         let e = Element {
             id: i.to_string(),
-            color_text: "#009900".to_string(),
+            color_text: tarpar::COLOR_BLUE.to_string(),
             color_line: "#009900".to_string(),
             action: "",
             object_type: "",
@@ -30,7 +56,25 @@ fn main() {
     for e in elements.iter_mut() {
         e.object_type = OBJECT_TYPE;
     }
-    // print
+    // postprocess2
+    for e in elements.iter_mut() {
+        // e.action = "ddd";
+        // e.action = get_action(&e.color_text);
+        e.set_action("text");
+    }
+    // postprocess3
+    // for e in elements.iter_mut() {
+    //     e.action = "ddd";
+    // }
+    // print1
+    for e in &elements {
+        println!("{:?}", e);
+    }
+    // postprocess2
+    for e in elements.iter_mut() {
+        e.set_action("line");
+    }
+    // print2
     for e in &elements {
         println!("{:?}", e);
     }
