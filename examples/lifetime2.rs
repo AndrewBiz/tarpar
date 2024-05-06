@@ -11,7 +11,7 @@ pub struct Element<'a> {
     pub object_type: &'a str,
 }
 
-fn get_action(color: String) -> &'static str {
+fn get_action(color: &String) -> &'static str {
     match color.as_str() {
         tarpar::COLOR_BLACK | "default" => tarpar::ACTION_USE,
         tarpar::COLOR_GREEN => tarpar::ACTION_CREATE,
@@ -41,7 +41,7 @@ fn main() {
     }
     // postprocess2
     for e in elements.iter_mut() {
-        e.action = get_action(e.color_text.clone());
+        e.action = get_action(&e.color_text);
     }
     // print1
     for e in &elements {
@@ -49,7 +49,7 @@ fn main() {
     }
     // postprocess2
     for e in elements.iter_mut() {
-        e.action = get_action(e.color_line.clone());
+        e.action = get_action(&e.color_line);
     }
     // print2
     for e in &elements {
