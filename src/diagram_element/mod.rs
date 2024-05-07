@@ -89,8 +89,24 @@ fn get_text_color(raw_style: &str, raw_value: &str) -> String {
         None
     };
     // TODO try read font color from html (rgb tag)
-    // example "<span style=\"border-color: var(--border-color); caret-color: rgb(0, 153, 0); color: rgb(0, 153, 0); font-size: 13px;\">- Динамика ТП&nbsp;</span>"
     let text_color2: Option<String> = None;
+    // example "<span style=\"border-color: var(--border-color); caret-color: rgb(0, 153, 0); color: rgb(0, 153, 0); font-size: 13px;\">- Динамика ТП&nbsp;</span>"
+    // let text_color2: Option<String> = None;
+    // let re = Regex::new(
+    //     r"color: rgb.(?<red>[0-9]{0,3}),(?<green>[0-9]{1,3}),(?<blue>[0-9]{0,3})",
+    // )
+    // .unwrap();
+    // let text_color2: Option<String> = if let Some(caps) = re.captures(&raw_value) {
+    //     eprintln!(
+    //         "{} {} {}",
+    //         caps["red"].to_string(),
+    //         caps["green"].to_string(),
+    //         caps["blue"].to_string()
+    //     );
+    //     None
+    // } else {
+    //     None
+    // };
 
     // try read font color from style (fontColor tag)
     let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
