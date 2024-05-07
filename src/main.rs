@@ -139,7 +139,7 @@ fn main() -> Result<()> {
                     continue;
                 };
                 if (e_val.element_type == ElementType::TextBlock)
-                    | (e_val.parent_id == current_system_id)
+                    & (e_val.parent_id == current_system_id)
                 {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
@@ -181,7 +181,7 @@ fn main() -> Result<()> {
                     continue;
                 };
                 if (e_val.element_type == ElementType::LinkLabel)
-                    | (e_val.parent_id == current_link_id)
+                    & (e_val.parent_id == current_link_id)
                 {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
