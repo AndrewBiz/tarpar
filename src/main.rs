@@ -186,7 +186,15 @@ fn main() -> Result<()> {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
                     // TODO use text color for label's action
-                    e_val.action = current_action; // for link labels we take action from link
+                    // find out correct action
+                    if (e_val.color_text == tarpar::COLOR_BLUE)
+                        | (e_val.color_text == tarpar::COLOR_GREEN)
+                        | (e_val.color_text == tarpar::COLOR_RED)
+                    {
+                        e_val.set_action("text");
+                    } else {
+                        e_val.action = current_action // for link labels we take action from link by default
+                    }
                 }
             }
 
