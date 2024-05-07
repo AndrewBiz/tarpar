@@ -118,11 +118,24 @@ fn main() -> Result<()> {
                 e_val.drawio_host = drawio_host;
                 e_val.drawio_version = drawio_version;
             }
-            // process systems
+            // process users and systems
             let mut current_system_id = "";
             let mut current_object = "".to_string();
             let mut current_object_type = "".to_string();
             for e_val in elements.iter_mut() {
+                // process user
+                if e_val.element_type == ElementType::Shape("umlActor".to_string()) {
+                    e_val.object = format!("{}", e_val.value);
+                    e_val.object_type = format!("Пользователь");
+                    indexed_elements.insert(
+                        e_val.id,
+                        DiagramElementShort {
+                            object: e_val.object.clone(),
+                        },
+                    );
+                    continue;
+                };
+                // process system
                 if e_val.element_type == ElementType::System {
                     current_system_id = e_val.id;
                     current_object = format!("{}", e_val.value);
@@ -138,6 +151,7 @@ fn main() -> Result<()> {
                     );
                     continue;
                 };
+                // process system function
                 if (e_val.element_type == ElementType::TextBlock)
                     & (e_val.parent_id == current_system_id)
                 {
