@@ -185,7 +185,6 @@ fn main() -> Result<()> {
                 {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
-                    // TODO use text color for label's action
                     // find out correct action
                     if (e_val.color_text == tarpar::COLOR_BLUE)
                         | (e_val.color_text == tarpar::COLOR_GREEN)
