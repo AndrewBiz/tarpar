@@ -244,4 +244,19 @@ impl<'a> DiagramElement<'a> {
         log::debug!("FINISH diagram element processing");
         result
     }
+
+    pub fn set_action(&mut self, color_type: &str) -> () {
+        let color = match color_type {
+            "text" => &self.color_text,
+            "line" => &self.color_line,
+            _ => "default",
+        };
+        self.action = match color {
+            tarpar::COLOR_BLACK | "default" => tarpar::ACTION_USE,
+            tarpar::COLOR_GREEN => tarpar::ACTION_CREATE,
+            tarpar::COLOR_BLUE => tarpar::ACTION_MODIFY,
+            tarpar::COLOR_RED => tarpar::ACTION_REMOVE,
+            _ => tarpar::ACTION_ERROR,
+        }
+    }
 }

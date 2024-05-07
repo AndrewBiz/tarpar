@@ -129,8 +129,7 @@ fn main() -> Result<()> {
                     e_val.object = current_object.clone();
                     current_object_type = format!("Система");
                     e_val.object_type = current_object_type.clone();
-                    // TODO let color = format!("{}", e_val.color_line);
-                    // e_val.action = tarpar::get_action(&color);
+                    e_val.set_action("line"); //for system we use color of border line
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
@@ -145,6 +144,7 @@ fn main() -> Result<()> {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
                     e_val.element_type = ElementType::SystemFunction;
+                    e_val.set_action("text"); //for system function we use text color
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
@@ -156,6 +156,7 @@ fn main() -> Result<()> {
 
             // process integrations
             let mut current_link_id = "";
+            let mut current_action = "";
             let mut current_object = "".to_string();
             let mut current_object_type = "".to_string();
             for e_val in elements.iter_mut() {
@@ -175,6 +176,8 @@ fn main() -> Result<()> {
                     e_val.object = current_object.clone();
                     current_object_type = format!("Интеграция");
                     e_val.object_type = current_object_type.clone();
+                    e_val.set_action("line"); //for link we use color of link line
+                    current_action = e_val.action;
                     continue;
                 };
                 if (e_val.element_type == ElementType::LinkLabel)
@@ -182,6 +185,8 @@ fn main() -> Result<()> {
                 {
                     e_val.object = current_object.clone();
                     e_val.object_type = current_object_type.clone();
+                    // TODO use text color for label's action
+                    e_val.action = current_action; // for link labels we take action from link
                 }
             }
 
