@@ -1,3 +1,4 @@
+use once_cell::sync::Lazy;
 use regex::Regex;
 use roxmltree::Node;
 
@@ -63,8 +64,9 @@ fn get_element_type(style: &str) -> ElementType {
     } else if style.contains("edgeLabel") {
         ElementType::LinkLabel
     } else if style.contains("shape=") {
-        let re = Regex::new(r"shape=(?<shape_name>[A-Za-z0-9._]+);").unwrap();
-        if let Some(caps) = re.captures(&style) {
+        static RE: Lazy<Regex> =
+            Lazy::new(|| Regex::new(r"shape=(?<shape_name>[A-Za-z0-9._]+);").unwrap());
+        if let Some(caps) = RE.captures(&style) {
             ElementType::Shape(caps["shape_name"].to_string())
         } else {
             ElementType::Shape("_".to_string())
@@ -90,11 +92,13 @@ fn get_text_color(raw_style: &str, raw_value: &str) -> String {
     };
 
     // try read font color from html (rgb tag)
-    let re = Regex::new(
-        r"[ ;]{1}color: rgb[(]{1}(?<red>\d{0,3}), (?<green>\d{1,3}), (?<blue>\d{0,3})[)]{1}",
-    )
-    .unwrap();
-    let text_color2: Option<String> = if let Some(caps) = re.captures(&raw_value) {
+    static RE: Lazy<Regex> = Lazy::new(|| {
+        Regex::new(
+            r"[ ;]{1}color: rgb[(]{1}(?<red>\d{0,3}), (?<green>\d{1,3}), (?<blue>\d{0,3})[)]{1}",
+        )
+        .unwrap()
+    });
+    let text_color2: Option<String> = if let Some(caps) = RE.captures(&raw_value) {
         let rgb = caps["red"].parse::<u16>().unwrap_or(0) * 256 * 256
             + caps["green"].parse::<u16>().unwrap_or(0) * 256
             + caps["blue"].parse::<u16>().unwrap_or(0);
@@ -106,8 +110,9 @@ fn get_text_color(raw_style: &str, raw_value: &str) -> String {
     };
 
     // try read font color from style (fontColor tag)
-    let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
-    let text_color3: Option<String> = if let Some(caps) = re.captures(&raw_style) {
+    static RE3: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap());
+    let text_color3: Option<String> = if let Some(caps) = RE3.captures(&raw_style) {
         Some(caps["color"].to_string().to_uppercase())
     } else {
         None
@@ -129,8 +134,9 @@ fn get_text_color(raw_style: &str, raw_value: &str) -> String {
 // **************************************
 fn get_line_color(raw_style: &str) -> String {
     // try read line color from style (strokeColor tag)
-    let re = Regex::new(r"strokeColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
-    if let Some(caps) = re.captures(&raw_style) {
+    static RE: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r"strokeColor=(?<color>[A-Za-z0-9#]{7})").unwrap());
+    if let Some(caps) = RE.captures(&raw_style) {
         caps["color"].to_string().to_uppercase()
     } else {
         "default".to_string()
