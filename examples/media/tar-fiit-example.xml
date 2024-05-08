@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-05-07T17:12:17.394Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="h6eIFoa6BLD8hVRlDhp5" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-08T14:27:09.144Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="pDV_BvUITk8rX_fJSzkS" version="24.2.5" type="device">
   <diagram name="17.04.2024" id="Thx3v6olRwI6cNQ1C39S">
     <mxGraphModel dx="1434" dy="1638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1862,14 +1862,16 @@
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-410" value="ПУ-ДУ-01: Данные &lt;br&gt;закрывающих документов&lt;br&gt;ПУ-ДУ-02: Учтенные оплаты" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="mCPMpIAHC7OkzRRA2IbE-376" connectable="0" vertex="1">
           <mxGeometry x="630.0008374397341" y="608.0000044328908" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;b&gt;ФП МСФО и УУ&lt;/b&gt;" tags="block_finances" id="mCPMpIAHC7OkzRRA2IbE-411">
+        <UserObject label="&lt;b&gt;ФП МСФО и УУ&lt;/b&gt;" tags="block_finances" tooltip="надо много чего доделать, всего и не перечислить" cluster="УЭ - Контроль бюджета" id="mCPMpIAHC7OkzRRA2IbE-411">
           <mxCell style="swimlane;strokeColor=#009900;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;" parent="mCPMpIAHC7OkzRRA2IbE-376" vertex="1">
             <mxGeometry x="20" y="78" width="320.5" height="90" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="mCPMpIAHC7OkzRRA2IbE-412" value="+ МСФО / УУ &amp;nbsp;в части блока ФП Первичного учета" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#009900;" parent="mCPMpIAHC7OkzRRA2IbE-411" vertex="1">
-          <mxGeometry y="26" width="320.5" height="26" as="geometry" />
-        </mxCell>
+        <object label="+ МСФО / УУ &amp;nbsp;в части блока ФП Первичного учета" cluster="УЭ - Бюджетирование" jira="fff-123, ggg-233" tooltip="это пояснение к функции - что надо конкретно сделать" id="mCPMpIAHC7OkzRRA2IbE-412">
+          <mxCell style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#009900;" parent="mCPMpIAHC7OkzRRA2IbE-411" vertex="1">
+            <mxGeometry y="26" width="320.5" height="26" as="geometry" />
+          </mxCell>
+        </object>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-413" value="&amp;nbsp; &amp;nbsp; + Ведение учета в соответствии с учетной политикой МСФО / УУ" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#009900;" parent="mCPMpIAHC7OkzRRA2IbE-411" vertex="1">
           <mxGeometry y="52" width="320.5" height="38" as="geometry" />
         </mxCell>
@@ -2592,6 +2594,23 @@
         </mxCell>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-409" value="&amp;nbsp; &amp;nbsp; + Мэппинги объектов строительства и статей оборотов" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#009900;" parent="mCPMpIAHC7OkzRRA2IbE-407" vertex="1">
           <mxGeometry y="52" width="320.5" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="Eifn8B2iZhb7j5di57kF-0" value="Бухгалтер" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="mCPMpIAHC7OkzRRA2IbE-1">
+          <mxGeometry x="1040" y="-125" width="30" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="Eifn8B2iZhb7j5di57kF-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.879;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="mCPMpIAHC7OkzRRA2IbE-1" source="Eifn8B2iZhb7j5di57kF-0" target="mCPMpIAHC7OkzRRA2IbE-426">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Eifn8B2iZhb7j5di57kF-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.156;entryY=0.006;entryDx=0;entryDy=0;entryPerimeter=0;fontColor=#009900;strokeColor=#009900;" edge="1" parent="mCPMpIAHC7OkzRRA2IbE-1" source="Eifn8B2iZhb7j5di57kF-0" target="mCPMpIAHC7OkzRRA2IbE-378">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Eifn8B2iZhb7j5di57kF-3" value="Казначей" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="mCPMpIAHC7OkzRRA2IbE-1">
+          <mxGeometry x="680" y="365" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Eifn8B2iZhb7j5di57kF-4" value="UI работы&lt;div&gt;казначея&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.31;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#009900;" edge="1" parent="mCPMpIAHC7OkzRRA2IbE-1" source="Eifn8B2iZhb7j5di57kF-3" target="mCPMpIAHC7OkzRRA2IbE-392">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
