@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-05-08T14:27:09.144Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="pDV_BvUITk8rX_fJSzkS" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-08T15:01:59.851Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="pbe8ycE-DqkEXCz9Dp2I" version="24.2.5" type="device">
   <diagram name="17.04.2024" id="Thx3v6olRwI6cNQ1C39S">
     <mxGraphModel dx="1434" dy="1638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2096,10 +2096,10 @@
             <mxPoint x="1260" y="920" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="mCPMpIAHC7OkzRRA2IbE-471" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#009900;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" parent="mCPMpIAHC7OkzRRA2IbE-1" source="mCPMpIAHC7OkzRRA2IbE-393" target="mCPMpIAHC7OkzRRA2IbE-466" edge="1">
+        <mxCell id="mCPMpIAHC7OkzRRA2IbE-471" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#009900;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;orthogonal=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="mCPMpIAHC7OkzRRA2IbE-1" source="mCPMpIAHC7OkzRRA2IbE-393" target="mCPMpIAHC7OkzRRA2IbE-466" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="930" y="840" as="sourcePoint" />
-            <mxPoint x="1260" y="710" as="targetPoint" />
+            <mxPoint x="580" y="850" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-472" value="КЗ-CB-01: Платежи" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="mCPMpIAHC7OkzRRA2IbE-471" vertex="1" connectable="0">

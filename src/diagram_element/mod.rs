@@ -58,7 +58,7 @@ fn get_element_type(style: &str) -> ElementType {
         ElementType::TextBlock
     } else if style.contains("swimlane") {
         ElementType::System
-    } else if style.contains("edgeStyle=") {
+    } else if style.contains("edgeStyle=") | style.contains("Arrow") {
         ElementType::Link
     } else if style.contains("edgeLabel") {
         ElementType::LinkLabel
