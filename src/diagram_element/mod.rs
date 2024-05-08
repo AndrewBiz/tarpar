@@ -81,48 +81,45 @@ fn get_text_color(raw_style: &str, raw_value: &str) -> String {
     let html_selector = scraper::Selector::parse(r#"font"#).unwrap();
     let text_color1 = if let Some(html_node) = html_fragment.select(&html_selector).next() {
         if let Some(font_color) = html_node.value().attr("color") {
-            Some(font_color.to_string())
+            Some(font_color.to_string().to_uppercase())
         } else {
             None
         }
     } else {
         None
     };
-    // TODO try read font color from html (rgb tag)
-    let text_color2: Option<String> = None;
-    // example "<span style=\"border-color: var(--border-color); caret-color: rgb(0, 153, 0); color: rgb(0, 153, 0); font-size: 13px;\">- Динамика ТП&nbsp;</span>"
-    // let text_color2: Option<String> = None;
-    // let re = Regex::new(
-    //     r"color: rgb.(?<red>[0-9]{0,3}),(?<green>[0-9]{1,3}),(?<blue>[0-9]{0,3})",
-    // )
-    // .unwrap();
-    // let text_color2: Option<String> = if let Some(caps) = re.captures(&raw_value) {
-    //     eprintln!(
-    //         "{} {} {}",
-    //         caps["red"].to_string(),
-    //         caps["green"].to_string(),
-    //         caps["blue"].to_string()
-    //     );
-    //     None
-    // } else {
-    //     None
-    // };
+
+    // try read font color from html (rgb tag)
+    let re = Regex::new(
+        r"[ ;]{1}color: rgb[(]{1}(?<red>\d{0,3}), (?<green>\d{1,3}), (?<blue>\d{0,3})[)]{1}",
+    )
+    .unwrap();
+    let text_color2: Option<String> = if let Some(caps) = re.captures(&raw_value) {
+        let rgb = caps["red"].parse::<u16>().unwrap_or(0) * 256 * 256
+            + caps["green"].parse::<u16>().unwrap_or(0) * 256
+            + caps["blue"].parse::<u16>().unwrap_or(0);
+
+        let rgb_str = format!("{:#08x}", rgb).to_uppercase();
+        Some(format!("#{}", &rgb_str[2..]))
+    } else {
+        None
+    };
 
     // try read font color from style (fontColor tag)
     let re = Regex::new(r"fontColor=(?<color>[A-Za-z0-9#]{7})").unwrap();
     let text_color3: Option<String> = if let Some(caps) = re.captures(&raw_style) {
-        Some(caps["color"].to_string())
+        Some(caps["color"].to_string().to_uppercase())
     } else {
         None
     };
 
     // get color
     let color = if let Some(color1) = text_color1 {
-        color1.to_uppercase()
+        color1
     } else if let Some(color2) = text_color2 {
-        color2.to_uppercase()
+        color2
     } else if let Some(color3) = text_color3 {
-        color3.to_uppercase()
+        color3
     } else {
         "default".to_string()
     };
