@@ -1601,7 +1601,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="mCPMpIAHC7OkzRRA2IbE-347" value="СИ-СП-01" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
+        <mxCell id="mCPMpIAHC7OkzRRA2IbE-347" value="СИ-СП-01 f" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
           <mxGeometry x="1640" y="2470" width="60" height="17" as="geometry" />
         </mxCell>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-348" value="Система источник&amp;nbsp; полезных&lt;br style=&quot;font-size: 8px;&quot;&gt;данных" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
