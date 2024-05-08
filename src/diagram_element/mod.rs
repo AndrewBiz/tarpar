@@ -144,7 +144,7 @@ impl<'a> DiagramElement<'a> {
         log::debug!("START diagram element processing {}", raw_element_name);
 
         let result = match raw_element_name {
-            "mxCell" | "UserObject" => {
+            "mxCell" | "UserObject" | "object" => {
                 // Reading raw tag values
                 // ID
                 let id = raw_element.attribute("id").unwrap_or(tarpar::NO_VALUE);
@@ -160,30 +160,32 @@ impl<'a> DiagramElement<'a> {
                 };
 
                 // TAGS, TOOLTIP, CLUSTER, JIRA
-                let (tags, tooltip, cluster, jira) = if raw_element_name == "UserObject" {
-                    // TAGS
-                    let tags = raw_element.attribute("tags").unwrap_or("");
-                    // TOOLTIP
-                    let tooltip = raw_element.attribute("tooltip").unwrap_or("");
-                    // CLUSTER
-                    let cluster = raw_element.attribute("cluster").unwrap_or("");
-                    // JIRA
-                    let jira = raw_element.attribute("jira").unwrap_or("");
-                    (tags, tooltip, cluster, jira)
-                } else {
-                    ("", "", "", "")
-                };
+                let (tags, tooltip, cluster, jira) =
+                    if (raw_element_name == "UserObject") | (raw_element_name == "object") {
+                        // TAGS
+                        let tags = raw_element.attribute("tags").unwrap_or("");
+                        // TOOLTIP
+                        let tooltip = raw_element.attribute("tooltip").unwrap_or("");
+                        // CLUSTER
+                        let cluster = raw_element.attribute("cluster").unwrap_or("");
+                        // JIRA
+                        let jira = raw_element.attribute("jira").unwrap_or("");
+                        (tags, tooltip, cluster, jira)
+                    } else {
+                        ("", "", "", "")
+                    };
 
                 // STYLE, PARENT, SOURCE, TARGET
                 // getting correct mxCell
-                let raw_element = if raw_element_name == "UserObject" {
-                    match raw_element.first_element_child() {
-                        Some(child_element) => child_element,
-                        None => raw_element,
-                    }
-                } else {
-                    raw_element
-                };
+                let raw_element =
+                    if (raw_element_name == "UserObject") | (raw_element_name == "object") {
+                        match raw_element.first_element_child() {
+                            Some(child_element) => child_element,
+                            None => raw_element,
+                        }
+                    } else {
+                        raw_element
+                    };
 
                 // STYLE
                 let raw_style = raw_element.attribute("style").unwrap_or(tarpar::NO_VALUE);
