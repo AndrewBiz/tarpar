@@ -12,9 +12,9 @@ fn main() {
             + caps["green"].parse::<u16>().unwrap_or(0) * 256
             + caps["blue"].parse::<u16>().unwrap_or(0);
 
-        let mut rgb_str = format!("{:#08x}", rgb);
-        rgb_str.replace_range(0..2, " #");
-        Some(rgb_str.trim().to_string().to_uppercase())
+        let rgb_str = format!("{:#08x}", rgb).to_uppercase();
+        // rgb_str.replace_range(0..2, "#");
+        Some(format!("#{}", &rgb_str[2..]))
     } else {
         None
     };
