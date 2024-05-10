@@ -192,6 +192,13 @@ fn main() -> Result<()> {
                     e_val.object_type = current_object_type.clone();
                     e_val.set_action("line"); //for link we use color of link line
                     current_action = e_val.action;
+                    // check if label color differs from line
+                    if (e_val.color_text == tarpar::COLOR_BLUE)
+                        | (e_val.color_text == tarpar::COLOR_GREEN)
+                        | (e_val.color_text == tarpar::COLOR_RED)
+                    {
+                        e_val.set_action("text");
+                    }
                     continue;
                 };
                 if (e_val.element_type == ElementType::LinkLabel)
