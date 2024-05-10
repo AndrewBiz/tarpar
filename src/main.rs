@@ -122,6 +122,7 @@ fn main() -> Result<()> {
             let mut current_system_id = "";
             let mut current_object = "".to_string();
             let mut current_object_type = "".to_string();
+            let mut current_team = "";
             for e_val in elements.iter_mut() {
                 // process user
                 if e_val.element_type == ElementType::Shape("umlActor".to_string()) {
@@ -143,6 +144,7 @@ fn main() -> Result<()> {
                     current_object_type = format!("Система");
                     e_val.object_type = current_object_type.clone();
                     e_val.set_action("line"); //for system we use color of border line
+                    current_team = e_val.team;
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
@@ -159,6 +161,11 @@ fn main() -> Result<()> {
                     e_val.object_type = current_object_type.clone();
                     e_val.element_type = ElementType::SystemFunction;
                     e_val.set_action("text"); //for system function we use text color
+
+                    // inherit team from system
+                    if (e_val.team == "") & (e_val.action != "") {
+                        e_val.team = current_team
+                    }
                     indexed_elements.insert(
                         e_val.id,
                         DiagramElementShort {
