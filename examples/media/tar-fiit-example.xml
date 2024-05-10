@@ -1862,12 +1862,12 @@
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-410" value="ПУ-ДУ-01: Данные &lt;br&gt;закрывающих документов&lt;br&gt;ПУ-ДУ-02: Учтенные оплаты" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="mCPMpIAHC7OkzRRA2IbE-376" connectable="0" vertex="1">
           <mxGeometry x="630.0008374397341" y="608.0000044328908" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;b&gt;ФП МСФО и УУ&lt;/b&gt;" tags="block_finances" tooltip="надо много чего доделать, всего и не перечислить" cluster="УЭ - Контроль бюджета" id="mCPMpIAHC7OkzRRA2IbE-411">
+        <UserObject label="&lt;b&gt;ФП МСФО и УУ&lt;/b&gt;" tags="block_finances" tooltip="надо много чего доделать, всего и не перечислить" team="УЭ - Контроль бюджета" id="mCPMpIAHC7OkzRRA2IbE-411">
           <mxCell style="swimlane;strokeColor=#009900;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;" parent="mCPMpIAHC7OkzRRA2IbE-376" vertex="1">
             <mxGeometry x="20" y="78" width="320.5" height="90" as="geometry" />
           </mxCell>
         </UserObject>
-        <object label="+ МСФО / УУ &amp;nbsp;в части блока ФП Первичного учета" cluster="УЭ - Бюджетирование" jira="fff-123, ggg-233" tooltip="это пояснение к функции - что надо конкретно сделать" id="mCPMpIAHC7OkzRRA2IbE-412">
+        <object label="+ МСФО / УУ &amp;nbsp;в части блока ФП Первичного учета" team="УЭ - Бюджетирование" tasks="fff-123, ggg-233" tooltip="это пояснение к функции - что надо конкретно сделать" id="mCPMpIAHC7OkzRRA2IbE-412">
           <mxCell style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#009900;" parent="mCPMpIAHC7OkzRRA2IbE-411" vertex="1">
             <mxGeometry y="26" width="320.5" height="26" as="geometry" />
           </mxCell>
@@ -2495,7 +2495,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="mCPMpIAHC7OkzRRA2IbE-548" value="&lt;b&gt;Jira - Инвест.блок&lt;/b&gt;" style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;spacing=2;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
+        <mxCell id="mCPMpIAHC7OkzRRA2IbE-548" value="&lt;b&gt;tasks - Инвест.блок&lt;/b&gt;" style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;spacing=2;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
           <mxGeometry x="3160" y="990" width="240" height="70" as="geometry" />
         </mxCell>
         <mxCell id="mCPMpIAHC7OkzRRA2IbE-549" value="Заявка на оценку и ТЭП по новым проектам" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#000000;" parent="mCPMpIAHC7OkzRRA2IbE-548" vertex="1">

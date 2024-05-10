@@ -33,8 +33,8 @@ pub struct DiagramElement<'a> {
     pub action: &'a str,
     pub tags: &'a str,
     pub tooltip: &'a str,
-    pub cluster: &'a str,
-    pub jira: &'a str,
+    pub team: &'a str,
+    pub tasks: &'a str,
     pub source_id: &'a str,
     pub target_id: &'a str,
     pub diagram_page_n: u8,
@@ -165,18 +165,18 @@ impl<'a> DiagramElement<'a> {
                     ""
                 };
 
-                // TAGS, TOOLTIP, CLUSTER, JIRA
-                let (tags, tooltip, cluster, jira) =
+                // TAGS, TOOLTIP, TEAM, tasks
+                let (tags, tooltip, team, tasks) =
                     if (raw_element_name == "UserObject") | (raw_element_name == "object") {
                         // TAGS
                         let tags = raw_element.attribute("tags").unwrap_or("");
                         // TOOLTIP
                         let tooltip = raw_element.attribute("tooltip").unwrap_or("");
-                        // CLUSTER
-                        let cluster = raw_element.attribute("cluster").unwrap_or("");
-                        // JIRA
-                        let jira = raw_element.attribute("jira").unwrap_or("");
-                        (tags, tooltip, cluster, jira)
+                        // TEAM
+                        let team = raw_element.attribute("team").unwrap_or("");
+                        // tasks
+                        let tasks = raw_element.attribute("tasks").unwrap_or("");
+                        (tags, tooltip, team, tasks)
                     } else {
                         ("", "", "", "")
                     };
@@ -246,8 +246,8 @@ impl<'a> DiagramElement<'a> {
                     action,
                     tags,
                     tooltip,
-                    cluster,
-                    jira,
+                    team,
+                    tasks,
                     source_id,
                     target_id,
                     diagram_page_n,

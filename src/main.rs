@@ -213,7 +213,7 @@ fn main() -> Result<()> {
 
             // export elements
             println!(
-                "sort;\"object type\";\"object\";\"value\";\"action\";\"tags\";\"tooltip\";\"cluster\";\"jira\";\"type\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
+                "sort;\"object type\";\"object\";\"value\";\"action\";\"tags\";\"tooltip\";\"team\";\"tasks\";\"type\";\"color text\";\"color line\";\"layer\";\"diagram\";\"drawio\";\"id\";\"parent_id\";"
             );
             for e_val in &elements {
                 println!(
@@ -226,8 +226,8 @@ fn main() -> Result<()> {
                     e_val.action,
                     e_val.tags,
                     e_val.tooltip,
-                    e_val.cluster,
-                    e_val.jira,
+                    e_val.team,
+                    e_val.tasks,
                     e_val.element_type,
                     e_val.color_text,
                     e_val.color_line,

@@ -2520,7 +2520,7 @@
         </Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="mCPMpIAHC7OkzRRA2IbE-548" value="&lt;b&gt;Jira - Инвест.блок&lt;/b&gt;" style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;spacing=2;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
+    <mxCell id="mCPMpIAHC7OkzRRA2IbE-548" value="&lt;b&gt;tasks - Инвест.блок&lt;/b&gt;" style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;swimlaneFillColor=default;spacing=2;" parent="mCPMpIAHC7OkzRRA2IbE-1" vertex="1">
       <mxGeometry x="3160" y="990" width="240" height="70" as="geometry" />
     </mxCell>
     <mxCell id="mCPMpIAHC7OkzRRA2IbE-549" value="Заявка на оценку и ТЭП по новым проектам" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#000000;" parent="mCPMpIAHC7OkzRRA2IbE-548" vertex="1">
