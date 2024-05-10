@@ -45,8 +45,9 @@ pub struct DiagramElement<'a> {
 }
 // **************************************
 #[derive(Debug)]
-pub struct DiagramElementShort {
+pub struct DiagramElementShort<'a> {
     pub object: String,
+    pub team: &'a str,
 }
 
 // **************************************

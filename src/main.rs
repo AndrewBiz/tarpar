@@ -132,6 +132,7 @@ fn main() -> Result<()> {
                         e_val.id,
                         DiagramElementShort {
                             object: e_val.object.clone(),
+                            team: e_val.team,
                         },
                     );
                     continue;
@@ -149,6 +150,7 @@ fn main() -> Result<()> {
                         e_val.id,
                         DiagramElementShort {
                             object: e_val.object.clone(),
+                            team: e_val.team,
                         },
                     );
                     continue;
@@ -170,6 +172,7 @@ fn main() -> Result<()> {
                         e_val.id,
                         DiagramElementShort {
                             object: e_val.object.clone(),
+                            team: e_val.team,
                         },
                     );
                 }
@@ -178,16 +181,19 @@ fn main() -> Result<()> {
             // process integrations
             let mut current_link_id = "";
             let mut current_action = "";
+            let mut current_source_team = "";
             let mut current_object = "".to_string();
             let mut current_object_type = "".to_string();
             for e_val in elements.iter_mut() {
                 if e_val.element_type == ElementType::Link {
                     current_link_id = e_val.id;
-                    let source_object = if let Some(e) = indexed_elements.get(e_val.source_id) {
-                        e.object.clone()
-                    } else {
-                        "___".to_string()
-                    };
+                    let source_object: String;
+                    (source_object, current_source_team) =
+                        if let Some(e) = indexed_elements.get(e_val.source_id) {
+                            (e.object.clone(), e.team)
+                        } else {
+                            ("___".to_string(), "")
+                        };
                     let target_object = if let Some(e) = indexed_elements.get(e_val.target_id) {
                         e.object.clone()
                     } else {
@@ -206,6 +212,10 @@ fn main() -> Result<()> {
                     {
                         e_val.set_action("text");
                     }
+                    // inherit team from source system\system function
+                    if (e_val.team == "") & (e_val.action != "") {
+                        e_val.team = current_source_team
+                    }
                     continue;
                 };
                 if (e_val.element_type == ElementType::LinkLabel)
@@ -221,6 +231,10 @@ fn main() -> Result<()> {
                         e_val.set_action("text");
                     } else {
                         e_val.action = current_action // for link labels we take action from link by default
+                    }
+                    // inherit team from source system\system function
+                    if (e_val.team == "") & (e_val.action != "") {
+                        e_val.team = current_source_team
                     }
                 }
             }
