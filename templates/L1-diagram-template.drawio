@@ -1,15 +1,15 @@
-<mxfile host="Electron" modified="2024-05-11T08:29:02.678Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="EzHm_KNEeV6e9zuxKCTe" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-11T17:16:37.784Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="3e_kTA2-8z5xcmrg4tPZ" version="24.2.5" type="device">
   <diagram name="L1 diagram" id="lnKFR2A0_PlhCYDjk-47">
     <mxGraphModel dx="2029" dy="8" grid="1" gridSize="10" guides="0" tooltips="1" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="WYcusz1EQhwt7nqvAaZp-32" value="Легенда" style="" parent="0" />
-        <mxCell id="w1Yb3G1GzCkss31SYDfo-8" value="Нотация архитектурной схемы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#B3B3B3;verticalAlign=top;fontSize=15;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;strokeWidth=1;fontStyle=1;align=left;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="10" y="2140" width="1630" height="190" as="geometry" />
+        <mxCell id="w1Yb3G1GzCkss31SYDfo-8" value="Нотация архитектурной схемы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#B3B3B3;verticalAlign=top;fontSize=15;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;strokeWidth=1;fontStyle=1;align=left;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
+          <mxGeometry x="62" y="2140" width="1540" height="190" as="geometry" />
         </mxCell>
         <object label="Система" placeholders="1" tooltip="" team="" tasks="" id="WYcusz1EQhwt7nqvAaZp-33">
           <mxCell style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;labelBackgroundColor=none;swimlaneFillColor=#FFFFFF;swimlaneLine=1;shadow=1;glass=0;allowArrows=1;fixDash=0;expand=1;movableLabel=0;rotatable=0;noLabel=0;snapToPoint=0;perimeter=rectanglePerimeter;metaEdit=0;resizeWidth=0;resizeHeight=0;cloneable=1;deletable=1;treeFolding=0;treeMoving=0;pointerEvents=0;enumerate=0;comic=0;movable=1;resizable=1;editable=1;locked=0;connectable=1;autosize=0;spacing=0;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-            <mxGeometry x="230" y="2180" width="190" height="50" as="geometry">
+            <mxGeometry x="272" y="2180" width="190" height="50" as="geometry">
               <mxRectangle x="1360" y="1390" width="90" height="30" as="alternateBounds" />
             </mxGeometry>
           </mxCell>
@@ -22,19 +22,19 @@
         <UserObject label="интеграционное&#xa;взаимодействие (ИВ)" tooltip="" team="" tasks="" placeholders="1" id="WYcusz1EQhwt7nqvAaZp-35">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#000000;strokeColor=#000000;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;jumpStyle=arc;flowAnimation=0;startArrow=none;startFill=0;" parent="WYcusz1EQhwt7nqvAaZp-32" source="WYcusz1EQhwt7nqvAaZp-33" target="w1Yb3G1GzCkss31SYDfo-4" edge="1">
             <mxGeometry x="0.0031" relative="1" as="geometry">
-              <mxPoint x="380" y="2290" as="sourcePoint" />
-              <mxPoint x="430" y="2330" as="targetPoint" />
+              <mxPoint x="422" y="2290" as="sourcePoint" />
+              <mxPoint x="472" y="2330" as="targetPoint" />
               <mxPoint as="offset" />
               <Array as="points">
-                <mxPoint x="315" y="2260" />
-                <mxPoint x="580" y="2260" />
+                <mxPoint x="357" y="2260" />
+                <mxPoint x="622" y="2260" />
               </Array>
             </mxGeometry>
           </mxCell>
         </UserObject>
         <object label="пользователь" placeholders="1" id="WYcusz1EQhwt7nqvAaZp-36">
           <mxCell style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;movableLabel=1;resizable=0;rotatable=0;treeFolding=0;treeMoving=0;enumerate=0;comic=0;resizeWidth=0;recursiveResize=0;textShadow=0;shadow=1;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-            <mxGeometry x="60" y="2175" width="30" height="60" as="geometry">
+            <mxGeometry x="102" y="2175" width="30" height="60" as="geometry">
               <mxPoint x="-1" y="-8" as="offset" />
             </mxGeometry>
           </mxCell>
@@ -42,14 +42,14 @@
         <UserObject label="взаимодействие" tooltip="" team="" tasks="" placeholders="1" id="w1Yb3G1GzCkss31SYDfo-1">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#000000;strokeColor=#000000;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;startArrow=classic;startFill=1;jumpStyle=arc;" parent="WYcusz1EQhwt7nqvAaZp-32" source="WYcusz1EQhwt7nqvAaZp-36" target="WYcusz1EQhwt7nqvAaZp-33" edge="1">
             <mxGeometry y="15" relative="1" as="geometry">
-              <mxPoint x="110" y="2305" as="sourcePoint" />
-              <mxPoint x="247" y="2270" as="targetPoint" />
+              <mxPoint x="152" y="2305" as="sourcePoint" />
+              <mxPoint x="289" y="2270" as="targetPoint" />
               <mxPoint as="offset" />
             </mxGeometry>
           </mxCell>
         </UserObject>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-7" value="" style="group" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1" connectable="0">
-          <mxGeometry x="460" y="2160" width="220" height="70" as="geometry" />
+          <mxGeometry x="502" y="2160" width="220" height="70" as="geometry" />
         </mxCell>
         <object label="Внешний сервис" placeholders="1" tooltip="" team="" tasks="" id="w1Yb3G1GzCkss31SYDfo-4">
           <mxCell style="swimlane;strokeColor=#000000;rounded=0;strokeWidth=1;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#CCCCCC;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;labelBackgroundColor=none;swimlaneFillColor=#FFFFFF;swimlaneLine=1;shadow=1;glass=0;allowArrows=1;fixDash=0;expand=1;movableLabel=0;rotatable=0;noLabel=0;snapToPoint=0;perimeter=rectanglePerimeter;metaEdit=0;resizeWidth=0;resizeHeight=0;cloneable=1;deletable=1;treeFolding=0;treeMoving=0;pointerEvents=0;enumerate=0;comic=0;movable=1;resizable=1;editable=1;locked=0;connectable=1;autosize=0;spacing=0;" parent="w1Yb3G1GzCkss31SYDfo-7" vertex="1">
@@ -67,23 +67,23 @@
           <mxGeometry x="3" y="11" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-9" value="Цвет черный (000000) - объект используется" style="text;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=default;fontSize=10;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="720" y="2180" width="270" height="20" as="geometry" />
+          <mxGeometry x="762" y="2180" width="270" height="20" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-11" value="Цвет зеленый (009900) - объект создается" style="text;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#009900;fontColor=#009900;fontSize=10;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="720" y="2205" width="270" height="20" as="geometry" />
+          <mxGeometry x="762" y="2205" width="270" height="20" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-12" value="Цвет синий (007FFF) - объект изменяется" style="text;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#007FFF;fontColor=#007FFF;fontSize=10;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="720" y="2231" width="270" height="20" as="geometry" />
+          <mxGeometry x="762" y="2231" width="270" height="20" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-13" value="Цвет красный (FF0000) - объект удаляется" style="text;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#FF0000;fontColor=#FF0000;fontSize=10;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="720" y="2257" width="270" height="20" as="geometry" />
+          <mxGeometry x="762" y="2257" width="270" height="20" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-14" value="Пример:" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="1050" y="2147" width="60" height="30" as="geometry" />
+          <mxGeometry x="1092" y="2147" width="60" height="30" as="geometry" />
         </mxCell>
         <object label="Система - изменяется" placeholders="1" tooltip="" team="" tasks="" id="w1Yb3G1GzCkss31SYDfo-15">
           <mxCell style="swimlane;strokeColor=#007FFF;rounded=0;strokeWidth=1;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=default;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;labelBackgroundColor=none;swimlaneFillColor=#FFFFFF;swimlaneLine=1;shadow=1;glass=0;allowArrows=1;fixDash=0;expand=1;movableLabel=0;rotatable=0;noLabel=0;snapToPoint=0;perimeter=rectanglePerimeter;metaEdit=0;resizeWidth=0;resizeHeight=0;cloneable=1;deletable=1;treeFolding=0;treeMoving=0;pointerEvents=0;enumerate=0;comic=0;movable=1;resizable=1;editable=1;locked=0;connectable=1;autosize=0;spacing=0;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-            <mxGeometry x="1073" y="2180" width="200" height="122" as="geometry">
+            <mxGeometry x="1115" y="2180" width="200" height="122" as="geometry">
               <mxRectangle x="1360" y="1390" width="90" height="30" as="alternateBounds" />
             </mxGeometry>
           </mxCell>
@@ -111,8 +111,8 @@
         <UserObject label="ИВ создается" tooltip="" team="" tasks="" placeholders="1" id="w1Yb3G1GzCkss31SYDfo-22">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#000000;strokeColor=#009900;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;startArrow=classic;startFill=1;jumpStyle=arc;" parent="WYcusz1EQhwt7nqvAaZp-32" source="w1Yb3G1GzCkss31SYDfo-16" edge="1">
             <mxGeometry x="-0.4286" y="13" relative="1" as="geometry">
-              <mxPoint x="1313" y="2215" as="sourcePoint" />
-              <mxPoint x="1593" y="2225" as="targetPoint" />
+              <mxPoint x="1355" y="2215" as="sourcePoint" />
+              <mxPoint x="1592" y="2225" as="targetPoint" />
               <mxPoint as="offset" />
             </mxGeometry>
           </mxCell>
@@ -120,21 +120,21 @@
         <UserObject label="ИВ удаляется" tooltip="" team="" tasks="" placeholders="1" id="w1Yb3G1GzCkss31SYDfo-23">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#000000;strokeColor=#FF0000;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;startArrow=classic;startFill=1;jumpStyle=arc;" parent="WYcusz1EQhwt7nqvAaZp-32" source="w1Yb3G1GzCkss31SYDfo-19" edge="1">
             <mxGeometry x="-0.421" y="7" relative="1" as="geometry">
-              <mxPoint x="1313" y="2245" as="sourcePoint" />
-              <mxPoint x="1593" y="2245" as="targetPoint" />
+              <mxPoint x="1355" y="2245" as="sourcePoint" />
+              <mxPoint x="1592" y="2245" as="targetPoint" />
               <mxPoint as="offset" />
             </mxGeometry>
           </mxCell>
         </UserObject>
         <UserObject label="ИВ1 создается" tooltip="" team="" tasks="" placeholders="1" id="w1Yb3G1GzCkss31SYDfo-24">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#009900;strokeColor=#007FFF;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;startArrow=classic;startFill=1;jumpStyle=arc;" parent="WYcusz1EQhwt7nqvAaZp-32" source="w1Yb3G1GzCkss31SYDfo-15" edge="1">
-            <mxGeometry x="0.1098" y="30" relative="1" as="geometry">
-              <mxPoint x="1343" y="2295" as="sourcePoint" />
-              <mxPoint x="1593" y="2295" as="targetPoint" />
+            <mxGeometry x="0.2764" y="30" relative="1" as="geometry">
+              <mxPoint x="1385" y="2295" as="sourcePoint" />
+              <mxPoint x="1592" y="2295" as="targetPoint" />
               <mxPoint as="offset" />
               <Array as="points">
-                <mxPoint x="1393" y="2265" />
-                <mxPoint x="1393" y="2295" />
+                <mxPoint x="1435" y="2265" />
+                <mxPoint x="1435" y="2295" />
               </Array>
             </mxGeometry>
           </mxCell>
@@ -142,28 +142,28 @@
         <UserObject label="ИВ2 изменяется" tooltip="" placeholders="1" team="" tasks="" id="w1Yb3G1GzCkss31SYDfo-25">
           <mxCell style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontColor=#007FFF;" parent="w1Yb3G1GzCkss31SYDfo-24" vertex="1" connectable="0">
             <mxGeometry x="0.2142" relative="1" as="geometry">
-              <mxPoint x="-13" y="-20" as="offset" />
+              <mxPoint x="14" y="-20" as="offset" />
             </mxGeometry>
           </mxCell>
         </UserObject>
         <UserObject label="ИВ3 удаляется" tooltip="" placeholders="1" team="" tasks="" id="w1Yb3G1GzCkss31SYDfo-26">
           <mxCell style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontColor=#FF0000;" parent="w1Yb3G1GzCkss31SYDfo-24" vertex="1" connectable="0">
             <mxGeometry x="0.2142" relative="1" as="geometry">
-              <mxPoint x="-16" y="-10" as="offset" />
+              <mxPoint x="10" y="-10" as="offset" />
             </mxGeometry>
           </mxCell>
         </UserObject>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-27" value="" style="shape=mxgraph.signs.safety.no_entry;html=1;pointerEvents=1;fillColor=#FF9933;strokeColor=#b85450;verticalLabelPosition=bottom;verticalAlign=top;align=center;sketch=0;aspect=fixed;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="60" y="2280" width="30" height="30" as="geometry" />
+          <mxGeometry x="102" y="2280" width="30" height="30" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-28" value="нецелевая система \ функция \ интеграция" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="90" y="2280" width="150" height="30" as="geometry" />
+          <mxGeometry x="132" y="2280" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-30" value="Линия пунктирная - объект не будет введен в эксплуатацию в рамках данного горизонта планирования" style="text;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=default;fontSize=10;dashed=1;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="720" y="2284" width="270" height="36" as="geometry" />
+          <mxGeometry x="762" y="2284" width="270" height="36" as="geometry" />
         </mxCell>
         <mxCell id="w1Yb3G1GzCkss31SYDfo-31" value="" style="shape=mxgraph.signs.safety.no_entry;html=1;pointerEvents=1;fillColor=#FF9933;strokeColor=#b85450;verticalLabelPosition=bottom;verticalAlign=top;align=center;sketch=0;aspect=fixed;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
-          <mxGeometry x="1303" y="2225" width="20" height="20" as="geometry" />
+          <mxGeometry x="1337" y="2225" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="1" value="пример схемы" parent="0" />
         <mxCell id="w1Yb3G1GzCkss31SYDfo-59" value="Сетевой периметр Компании Стройка Века" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;verticalAlign=top;align=right;dashed=1;dashPattern=1 1;shadow=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
