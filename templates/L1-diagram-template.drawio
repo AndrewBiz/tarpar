@@ -1,9 +1,9 @@
-<mxfile host="Electron" modified="2024-05-10T17:55:37.577Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="_IAWqsdZXVKZGlH2Mwx6" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-11T08:29:02.678Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="EzHm_KNEeV6e9zuxKCTe" version="24.2.5" type="device">
   <diagram name="L1 diagram" id="lnKFR2A0_PlhCYDjk-47">
-    <mxGraphModel dx="1420" dy="-345" grid="1" gridSize="10" guides="0" tooltips="1" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2029" dy="8" grid="1" gridSize="10" guides="0" tooltips="1" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
-        <mxCell id="WYcusz1EQhwt7nqvAaZp-32" value="Legend" style="" parent="0" />
+        <mxCell id="WYcusz1EQhwt7nqvAaZp-32" value="Легенда" style="" parent="0" />
         <mxCell id="w1Yb3G1GzCkss31SYDfo-8" value="Нотация архитектурной схемы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#B3B3B3;verticalAlign=top;fontSize=15;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;strokeWidth=1;fontStyle=1;align=left;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
           <mxGeometry x="10" y="2140" width="1630" height="190" as="geometry" />
         </mxCell>
@@ -21,7 +21,7 @@
         </UserObject>
         <UserObject label="интеграционное&#xa;взаимодействие (ИВ)" tooltip="" team="" tasks="" placeholders="1" id="WYcusz1EQhwt7nqvAaZp-35">
           <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontColor=#000000;strokeColor=#000000;curved=0;fillOpacity=100;metaEdit=0;noJump=0;ignoreEdge=0;orthogonal=1;enumerate=0;bendable=1;perimeterSpacing=3;comic=0;arcSize=15;labelBackgroundColor=none;spacing=0;shadow=0;horizontal=1;jumpStyle=arc;flowAnimation=0;startArrow=none;startFill=0;" parent="WYcusz1EQhwt7nqvAaZp-32" source="WYcusz1EQhwt7nqvAaZp-33" target="w1Yb3G1GzCkss31SYDfo-4" edge="1">
-            <mxGeometry x="0.0033" relative="1" as="geometry">
+            <mxGeometry x="0.0031" relative="1" as="geometry">
               <mxPoint x="380" y="2290" as="sourcePoint" />
               <mxPoint x="430" y="2330" as="targetPoint" />
               <mxPoint as="offset" />
@@ -165,8 +165,8 @@
         <mxCell id="w1Yb3G1GzCkss31SYDfo-31" value="" style="shape=mxgraph.signs.safety.no_entry;html=1;pointerEvents=1;fillColor=#FF9933;strokeColor=#b85450;verticalLabelPosition=bottom;verticalAlign=top;align=center;sketch=0;aspect=fixed;" parent="WYcusz1EQhwt7nqvAaZp-32" vertex="1">
           <mxGeometry x="1303" y="2225" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="1" value="example" parent="0" />
-        <mxCell id="w1Yb3G1GzCkss31SYDfo-59" value="Сетевой периметр Компании Стройка Века" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;verticalAlign=top;align=right;dashed=1;dashPattern=1 1;shadow=0;" parent="1" vertex="1">
+        <mxCell id="1" value="пример схемы" parent="0" />
+        <mxCell id="w1Yb3G1GzCkss31SYDfo-59" value="Сетевой периметр Компании Стройка Века" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;verticalAlign=top;align=right;dashed=1;dashPattern=1 1;shadow=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
           <mxGeometry x="270" y="1410" width="1170" height="620" as="geometry" />
         </mxCell>
         <object label="Ромашка" placeholders="1" tooltip="" team="Финансы - Базовый учет" tasks="" id="w1Yb3G1GzCkss31SYDfo-33">
