@@ -17,7 +17,7 @@ use crate::diagram_element::DiagramElement;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None, verbatim_doc_comment)]
 pub struct CliArgs {
-    /// File to be parced
+    /// File to be parsed
     drawio_file: String,
     #[arg(long)]
     /// Show debug information
@@ -74,6 +74,11 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
 }
 
 // **************************************
+fn normalize_string(in_str: String) -> String {
+    in_str.replace("\n", " ").replace("\"", "'")
+}
+
+// **************************************
 fn main() -> Result<()> {
     let cli_args = CliArgs::parse();
     if cli_args.debug {
@@ -89,7 +94,7 @@ fn main() -> Result<()> {
     let text = std::fs::read_to_string(&cli_args.drawio_file).unwrap();
 
     let tree = roxmltree::Document::parse(&text)
-        .with_context(|| format!("Failed parcing {} with roxmltree", &cli_args.drawio_file))?;
+        .with_context(|| format!("Failed parsing {} with roxmltree", &cli_args.drawio_file))?;
 
     let root_element = tree.root_element();
     if !root_element.has_tag_name("mxfile") {
@@ -249,19 +254,19 @@ fn main() -> Result<()> {
                     e_val.diagram_page_n,
                     e_val.sort,
                     e_val.object_type,
-                    e_val.object,
-                    e_val.value,
+                    normalize_string(e_val.object.clone()),
+                    normalize_string(e_val.value.clone()),
                     e_val.action,
-                    e_val.tags,
-                    e_val.tooltip,
-                    e_val.team,
-                    e_val.tasks,
+                    normalize_string(e_val.tags.to_string()),
+                    normalize_string(e_val.tooltip.to_string()),
+                    normalize_string(e_val.team.to_string()),
+                    normalize_string(e_val.tasks.to_string()),
                     e_val.element_type,
                     e_val.color_text,
                     e_val.color_line,
-                    e_val.layer,
+                    normalize_string(e_val.layer.clone()),
                     e_val.diagram_page_n,
-                    e_val.diagram_page_name,
+                    normalize_string(e_val.diagram_page_name.to_string()),
                     e_val.drawio_host,
                     e_val.drawio_version,
                     e_val.id,

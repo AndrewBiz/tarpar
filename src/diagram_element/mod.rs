@@ -221,7 +221,7 @@ impl<'a> DiagramElement<'a> {
                     .iter()
                     .map(|x| x.trim())
                     .collect();
-                let value = text_vec.join(" ").replace("\n", " ");
+                let value = text_vec.join(" ");
 
                 // rest of fields (will be set later)
                 let object_type = "".to_string();
