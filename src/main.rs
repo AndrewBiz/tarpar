@@ -250,7 +250,7 @@ fn main() -> Result<()> {
             );
             for e_val in &elements {
                 println!(
-                    "{:02}{:04};\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{:?}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
+                    "{:02}{:04};\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}\";\"{}-{}\";\"{}-{}\";\"{}\";\"{}\";",
                     e_val.diagram_page_n,
                     e_val.sort,
                     e_val.object_type,
@@ -261,14 +261,14 @@ fn main() -> Result<()> {
                     normalize_string(e_val.tooltip.to_string()),
                     normalize_string(e_val.team.to_string()),
                     normalize_string(e_val.tasks.to_string()),
-                    e_val.element_type,
+                    normalize_string(format!("{:?}", e_val.element_type)),
                     e_val.color_text,
                     e_val.color_line,
                     normalize_string(e_val.layer.clone()),
                     e_val.diagram_page_n,
                     normalize_string(e_val.diagram_page_name.to_string()),
-                    e_val.drawio_host,
-                    e_val.drawio_version,
+                    normalize_string(e_val.drawio_host.to_string()),
+                    normalize_string(e_val.drawio_version.to_string()),
                     e_val.id,
                     e_val.parent_id,
                 );
