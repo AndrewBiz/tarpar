@@ -204,7 +204,7 @@ fn main() -> Result<()> {
                     } else {
                         "___".to_string()
                     };
-                    current_object = format!("{} --> {}", source_object, target_object);
+                    current_object = format!("{} <--> {}", source_object, target_object);
                     e_val.object = current_object.clone();
                     current_object_type = format!("Интеграция");
                     e_val.object_type = current_object_type.clone();
