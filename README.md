@@ -27,4 +27,4 @@ cd tarpar
 cargo build --release
 ```
 
-3. Готовая утилита будет лежать здесь: **./tarpar/target/release/tarpar[.exe]**
+3. Готовая утилита будет лежать здесь: **./target/release/tarpar[.exe]**
