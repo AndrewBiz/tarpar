@@ -1,17 +1,11 @@
 mod diagram_element;
 
-use std::collections::HashMap;
-
+use crate::diagram_element::DiagramElement;
 use crate::diagram_element::{DiagramElementShort, ElementType};
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use roxmltree::Node;
-// use tarpar::{
-//     ACTION_CREATE, ACTION_ERROR, ACTION_MODIFY, ACTION_REMOVE, ACTION_USE, COLOR_BLACK, COLOR_BLUE,
-//     COLOR_GREEN, COLOR_RED,
-// };
-
-use crate::diagram_element::DiagramElement;
+use std::collections::HashMap;
 
 // command options and arguments
 #[derive(Parser, Debug)]
@@ -91,7 +85,8 @@ fn main() -> Result<()> {
     log::debug!("START main");
     log::debug!("Arguments set by the user: {:?}", &cli_args);
 
-    let text = std::fs::read_to_string(&cli_args.drawio_file).unwrap();
+    let text = std::fs::read_to_string(&cli_args.drawio_file)
+        .with_context(|| format!("Failed reading file {}", &cli_args.drawio_file))?;
 
     let tree = roxmltree::Document::parse(&text)
         .with_context(|| format!("Failed parsing {} with roxmltree", &cli_args.drawio_file))?;
