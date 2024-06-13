@@ -9,7 +9,7 @@ use std::collections::HashMap;
 
 // command options and arguments
 #[derive(Parser, Debug)]
-#[command(version, about, long_about = None, verbatim_doc_comment)]
+#[command(version, about, long_about = None, verbatim_doc_comment, arg_required_else_help = true)]
 pub struct CliArgs {
     /// File to be parsed
     drawio_file: String,
