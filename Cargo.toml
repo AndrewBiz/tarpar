@@ -1,7 +1,7 @@
 [package]
 name = "tarpar"
 description = "Tool for parcing drawio xml file and generate list of objects in text form"
-version = "1.4.3-beta"
+version = "1.4.4-beta"
 edition = "2021"
 authors = ["Andrew Bizyaev <andrew.bizyaev@gmail.com>"]
 
@@ -14,5 +14,10 @@ env_logger = "0.11"
 log = "0.4"
 once_cell = "1.19.0"
 regex = "1.10"
-roxmltree = "0.19"
+roxmltree = "0.20"
 scraper = "0.19"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+assert_fs = "1.1"
+predicates = "3.1"
