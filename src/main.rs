@@ -168,7 +168,7 @@ fn main() -> Result<()> {
                     e_val.set_action("text"); //for system function we use text color
 
                     // inherit team from system
-                    if (e_val.team == "") & (e_val.action != "") {
+                    if e_val.team == "" {
                         e_val.team = current_team
                     }
                     indexed_elements.insert(
@@ -216,7 +216,7 @@ fn main() -> Result<()> {
                         e_val.set_action("text");
                     }
                     // inherit team from source system\system function
-                    if (e_val.team == "") & (e_val.action != "") {
+                    if e_val.team == "" {
                         e_val.team = current_source_team
                     }
                     continue;
@@ -236,7 +236,7 @@ fn main() -> Result<()> {
                         e_val.action = current_action // for link labels we take action from link by default
                     }
                     // inherit team from source system\system function
-                    if (e_val.team == "") & (e_val.action != "") {
+                    if e_val.team == "" {
                         e_val.team = current_source_team
                     }
                 }
