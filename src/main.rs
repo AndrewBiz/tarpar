@@ -69,7 +69,10 @@ fn read_diagram<'a>(diagram: Node<'a, 'a>) -> Vec<DiagramElement<'a>> {
 
 // **************************************
 fn normalize_string(in_str: String) -> String {
-    in_str.replace("\n", " ").replace("\"", "'")
+    in_str
+        .replace("\n", " ")
+        .replace("\"", "'")
+        .replace(";", ",")
 }
 
 // **************************************
@@ -93,7 +96,7 @@ fn main() -> Result<()> {
 
     let root_element = tree.root_element();
     if !root_element.has_tag_name("mxfile") {
-        return Err(anyhow!("file is not drawio!"));
+        return Err(anyhow!("File is not drawio!"));
     }
 
     let drawio_host = root_element.attribute("host").unwrap_or(tarpar::NO_VALUE);
